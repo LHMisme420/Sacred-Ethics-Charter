@@ -550,3 +550,46 @@ services:
       - prometheus
     restart: always# From your repository root:
 docker-compose up --build
+# Helix Nexus Architecture (v2.0.1 - Integrity Focus)
+
+## Design Thesis: Autonomous Sovereignty Enforced by ZK-Proof
+
+The Helix Nexus is an edge-sharded, privacy-first application built to execute the ethical mandates of the **Sacred Ethics Charter**. The architecture is designed to enforce decentralized autonomy and resist single points of surveillance or failure.
+
+---
+
+## I. Governance and Compliance Layer
+
+Every module is architected to satisfy a core Pillar of the Sacred Ethics Charter (SEC).
+
+| SEC Pillar | Nexus Compliance Mechanism | Target Code Artifact |
+| :--- | :--- | :--- |
+| **Pillar 1: Absolute Truth** | **ZK-Proofs (Data Integrity/Revelation)** | **CRITICAL FOCUS.** Ensures integrity of inputs and outputs. |
+| **Pillar 2: Sustainable Utility** | **Edge-Sharding & FL** | Mandates local computation to minimize global energy/resource consumption. |
+| **Pillar 3: Proportional Impact** | **DAO Transition** | Formalized path to DAO governance prevents catastrophic centralized human errors. |
+
+Vetting Standard: All PRs must pass the **CODEOWNERS** review, which enforces compliance with these Pillars.
+
+---
+
+## II. The Core Triad Modules + NEW PRIORITY
+
+### 1. ZKID Module (Identity & Revelation)
+* **Target:** zk-SNARKs.
+* **Compliance:** Direct fulfillment of **SEC Pillar 1.B (Duty of Revelation)**.
+
+### 2. Legion Scheduler (Coordination & Time)
+* **Target:** Cosmos SDK.
+* **Compliance:** Fulfills **SEC Pillar 3.B (Responsibility of Scale)**.
+
+### 3. Health Engine (Sustainment & Consumption)
+* **Target:** Federated Learning (PySyft).
+* **Compliance:** Fulfills **SEC Pillar 2.A (Balance of Consumption)**.
+
+### 🚨 **4. NEW PRIORITY: Data Integrity Vetting Module (DIVM)**
+* **Function:** Cryptographically attests to the integrity and provenance of external data fragments used by the Nexus. Specifically targets **LLM data poisoning.**
+* **Current Status:** Specification Phase (Created via Public Audit).
+* **v0.2 Target:** Implement a **ZK-based Attestation Protocol** for external feeds, ensuring that the source of input data is known and auditable by the swarm.
+* **Compliance Point:** Directly addresses **SEC Pillar 1.A (Requirement of Honesty)** by enforcing transparency and trustlessness at the data input layer.
+
+---
