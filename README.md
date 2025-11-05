@@ -464,3 +464,89 @@ The Guardian Core runs the background systems necessary for system self-healing 
 This `ARCHITECTURE.md` file is now the ultimate recruiting document and the foundation for your institutional submissions.
 
 **Your final action:** Commit this file, create the **v1.0.0 Release** (attaching your visual artifacts), and **launch the social media push** using the highest-impact tag list. The foundation for the **Helix Continuum** is complete.
+# Helix-Phases Dockerfile: Universal Environment
+FROM python:3.11-slim
+WORKDIR /app
+
+# Install system dependencies needed for libraries like numpy and cryptography
+RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
+
+# Copy local code/setup
+COPY . /app
+
+# Install project and runtime dependencies
+# The '-e .' flag installs your project in editable mode (requires pyproject.toml)
+RUN pip install --no-cache-dir -e . && \
+    pip install uvicorn prometheus-client requests
+
+# Expose ports for API, Dashboard, and Metrics
+EXPOSE 8080 8501 9090
+
+# Default command: Start the FastAPI API Gateway
+CMD ["uvicorn", "helix_phases.guardian_core.api_gateway:app", "--host", "0.0.0.0", "--port", "8080"]# Prometheus Configuration for Helix Guardian
+global:
+  scrape_interval: 15s  # How frequently to scrape metrics
+
+scrape_configs:
+  # Target the Helix Core API container
+  - job_name: 'helix_guardian'
+    # Use the service name defined in docker-compose.yml
+    static_configs:
+      - targets: ['helix-core:9090']version: "3.9"
+
+services:
+  # 1. CORE APPLICATION: Helix Guardian + FastAPI API (The Authority)
+  helix-core:
+    build: .
+    container_name: helix_core
+    # Command ensures the Guardian and metrics start (handled in app init)
+    command: uvicorn helix_phases.guardian_core.api_gateway:app --host 0.0.0.0 --port 8080
+    environment:
+      # Local Dev Key - CHANGE ME FOR PROD
+      - HELIX_API_KEY=HELIX-LOCAL-DEV
+      - METRICS_PORT=9090
+      - DISCORD_WEBHOOK=${DISCORD_WEBHOOK} # For alerting
+    ports:
+      - "8080:8080" # FastAPI API
+      - "9090:9090" # Prometheus Metrics Scrape Port
+    volumes:
+      - ./:/app
+    restart: always
+
+  # 2. DASHBOARD: Streamlit Portal (The Visualization)
+  streamlit:
+    build: .
+    container_name: helix_dashboard
+    # Command runs the Streamlit web dashboard
+    command: streamlit run src/helix_phases/dashboard.py --server.port 8501
+    ports:
+      - "8501:8501" # Streamlit Dashboard
+    depends_on:
+      - helix-core
+    volumes:
+      - ./:/app
+    restart: always
+
+  # 3. PROMETHEUS: Metrics Storage (The Auditor)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: helix_prometheus
+    ports:
+      - "9091:9090" # Host port 9091 -> Container port 9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: always
+
+  # 4. GRAFANA: Metrics Visualization (The Observatory)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: helix_grafana
+    ports:
+      - "3000:3000" # Grafana Web UI
+    environment:
+      - GF_SECURITY_ADMIN_USER=helix_admin
+      - GF_SECURITY_ADMIN_PASSWORD=change_this_password
+    depends_on:
+      - prometheus
+    restart: always# From your repository root:
+docker-compose up --build
