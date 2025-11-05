@@ -675,3 +675,61 @@ if __name__ == "__main__":
     post_welcome("NewSwarmMember42", "Sacred-Ethics-Charter")
     
     # This code would be adapted into a GitHub Action triggered by 'issues.opened' or 'stars.created'
+# AUTHORS.md: The Recognized Swarm
+
+The Helix Continuum is forged by the hands of the many. Every line of code, every philosophical challenge, and every submitted audit is recorded here. We thank those who join the Legion.
+
+## I. Genesis Maintainer
+* LHMisme420 (Leroy H. Mason) — *Founder, Architect, and Primary Maintainer*
+
+## II. Generational Contributors (v1.0.0-generational-genesis)
+
+**To be included, contributors must have at least one Pull Request merged into the `main` branch or one accepted Use Case in the `Sacred-Ethics-Charter` repository.**
+
+| Contributor | GitHub Handle | Contribution Focus | Date Joined |
+| :--- | :--- | :--- | :--- |
+| **[Your Name]** | [@LHMisme420] | Philosophy, Governance, Core Architecture | November 2025 |
+| *[Contributor Name]* | *[@Handle]* | *[e.g., ZK Circuit Review, FL Integration]* | *[Date]* |
+| *[Contributor Name]* | *[@Handle]* | *[e.g., Standards Vetting, Code of Conduct]* | *[Date]* |
+
+---
+
+## III. Philosophical Auditors
+
+**Individuals who provided high-rigor feedback and critical review of the Sacred Ethics Charter (CODE OF CONDUCT Section 1).**
+
+* *User Handle*
+* *User Handle*# SECURITY_BADGE_STATUS.yml - Automated Security Scorecard
+
+name: Security Scorecard Check
+
+on:
+  schedule:
+    - cron: '30 0 * * *' # Run daily at 00:30 UTC
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+permissions:
+  contents: read
+
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run CodeQL Security Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          languages: 'python' # Adjust for your core language
+
+      # Placeholder: Integrate an external security scanning tool (e.g., Snyk/Code Climate)
+      # This provides a public, third-party badge showing your security grade.
+      - name: Generate Security Status Badge
+        # In a real setup, this step uploads the security status to a public badge service
+        # and updates the badge link in the README.md.
+        run: echo "::set-output name=security_status::passing"
+
+    outputs:
+      security_status: ${{ steps.analysis.outputs.security_status }}
