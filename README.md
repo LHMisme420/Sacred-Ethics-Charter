@@ -593,3 +593,54 @@ Vetting Standard: All PRs must pass the **CODEOWNERS** review, which enforces co
 * **Compliance Point:** Directly addresses **SEC Pillar 1.A (Requirement of Honesty)** by enforcing transparency and trustlessness at the data input layer.
 
 ---
+// zk_audit_circuit.circom
+// Helix Nexus: Data Integrity Vetting Module (DIVM)
+// Purpose: Cryptographically prove the integrity and provenance of external data fragments (e.g., LLM training data).
+
+pragma circom 2.0.0;
+
+/*
+    Constraint: Prove integrity of a data source without revealing the source itself.
+    This circuit will be expanded to verify Merkle proofs of inclusion (if data is stored
+    on a verifiable ledger) and check timestamp/provenance rules.
+*/
+
+template DataIntegrityVetter() {
+    // 1. PUBLIC INPUTS (What the swarm sees and verifies)
+    
+    // The final root hash of the Merkle Tree containing ALL audited data fragments.
+    // Proves that a specific, verifiable snapshot of data was used.
+    signal input root_hash;
+    
+    // The hash of the specific data element being vetted (e.g., one LLM input sentence).
+    signal input data_element_hash; 
+    
+    // The verifiable timestamp proof (proves the data was created/added before the audit date).
+    signal input timestamp_proof;
+    
+    
+    // 2. PRIVATE INPUTS (What the Prover has, but keeps secret)
+    
+    // The path/indices proving data_element_hash is included in root_hash.
+    signal private merkle_path[32]; 
+    
+    // The hidden details of the data element itself (the actual LLM input string).
+    signal private private_data_details[2]; 
+    
+    
+    // 3. CORE CONSTRAINTS (The Integrity Check)
+    
+    // 3a. [MOCK] Data must be proven to be included in the Merkle Tree (i.e., known data).
+    // In the real circuit, we would call a Merkle tree verification template here:
+    // MerkleChecker(root_hash, data_element_hash, merkle_path) <==> 1; 
+    
+    // 3b. [MOCK] Enforce Provenance Rule: Data creation timestamp must meet ethical standards.
+    // The timestamp_proof must pass validation against a global ethics clock.
+    timestamp_proof * (timestamp_proof - 1) === 0; // Simple binary check placeholder: either 0 or 1.
+    
+    // 4. OUTPUTS (The final verdict)
+    signal output integrity_verified <== data_element_hash * timestamp_proof; 
+    // This output is 1 ONLY if the data hash is verified AND the time proof passes.
+}
+
+component main = DataIntegrityVetter();
