@@ -304,3 +304,14 @@ The truth is, ethical creation often requires compromises in design, scale, or p
 
 # Note: Once the DAO transition occurs (v1.0), these usernames will be 
 # replaced by GitHub Teams representing the voted-in maintainers.
+### Repository Structure
+
+This charter is version-controlled and open for constructive input.
+
+| File/Directory | Purpose |
+| :--- | :--- |
+| [CHARTER/CHARTER.md](CHARTER/CHARTER.md) | The complete, canonical source text of the Sacred Ethics Charter. |
+| [PRINCIPLES/](PRINCIPLES/) | Individual markdown files for each of the core ethical principles, easy for citation. |
+| [USE_CASES/](USE_CASES/) | Examples of how this Charter has been applied and tested against real projects. |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Guidelines for suggesting amendments and evolving the framework. |
+| [LICENSE](LICENSE) | Defines the terms for using and sharing this Charter (Creative Commons Attribution 4.0). |
