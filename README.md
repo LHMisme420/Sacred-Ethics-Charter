@@ -236,4 +236,37 @@ This conceptual digital art installation initially failed the **Pillar 2.A (Bala
 
 The truth is, ethical creation often requires compromises in design, scale, or profit. This Charter provides the necessary **moral authority** to enforce those difficult decisions in favor of **sustainability.**
 
----
+---# CODEOWNERS - Legion Nexus: Op Unified Pulse
+# This file dictates which users or teams are responsible for code review 
+# in different parts of the repository. This structure is foundational 
+# for future decentralized governance (DAO).
+
+# **********************************************
+# CORE GOVERNANCE AND HIGH-LEVEL FILES (Initial Maintainer)
+# All top-level files require sign-off from the primary maintainer.
+/README.md          @LHMisme420
+/LICENSE            @LHMisme420
+/SECURITY.md        @LHMisme420
+/GOVERNANCE.md      @LHMisme420
+
+# **********************************************
+# MODULE OWNERS (Future DAO Working Groups)
+
+# ZKID Module - Zero-Knowledge/Cryptography
+/zk_id.py           @LHMisme420 # Placeholder: Future ZK Working Group
+/tests/test_zkid.py @LHMisme420
+
+# Scheduler Module - Coordination/Time/Networking
+/scheduler.py       @LHMisme420 # Placeholder: Future Swarm Ops Team
+/tests/test_scheduler.py @LHMisme420
+
+# Health Engine Module - Federated Learning/AI/NumPy
+/health_nudge.py    @LHMisme420 # Placeholder: Future Health ML Group
+/tests/test_health_nudge.py @LHMisme420
+
+# Workflow and Tooling
+/.github/workflows/  @LHMisme420 # Placeholder: Future Infra Team
+/requirements.txt    @LHMisme420
+
+# Note: Once the DAO transition occurs (v1.0), these usernames will be 
+# replaced by GitHub Teams representing the voted-in maintainers.
