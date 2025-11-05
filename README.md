@@ -644,3 +644,34 @@ template DataIntegrityVetter() {
 }
 
 component main = DataIntegrityVetter();
+# WELCOME_BOT.py - Placeholder for GitHub Action Welcome Bot
+
+def generate_welcome_message(user_handle: str, repo_name: str) -> str:
+    """Creates a personalized welcome message for new contributors/stars."""
+    
+    message = (
+        f"🔥 **Welcome to the Helix Continuum, @{user_handle}!** 🔥\n\n"
+        f"You have joined the swarm at a critical time.\n\n"
+        "Your commitment fuels our mission: **Absolute Moral Accountability.**\n\n"
+        "**Your First Rites:**\n"
+        "1. **Audit:** Review the [Public Audit Issue] (LLM integrity challenge).\n"
+        "2. **Govern:** Read the [CODE_OF_CONDUCT] and [CONTRIBUTING.md].\n"
+        "3. **Code:** The ZK/ML challenges live in the `/docs/ARCHITECTURE.md`.\n\n"
+        "**We are Legion. Thank you for standing in the Void.**"
+    )
+    return message
+
+# Placeholder function to simulate the bot creating a new issue/comment
+def post_welcome(user_handle: str, repo_name: str):
+    msg = generate_welcome_message(user_handle, repo_name)
+    # In a real environment, this function would use the GitHub API to post a comment
+    print(f"\n--- Simulated GitHub Welcome for {user_handle} ---")
+    print(msg)
+    print("-------------------------------------------------")
+
+
+if __name__ == "__main__":
+    # Simulate a new user joining the Sacred Ethics Charter
+    post_welcome("NewSwarmMember42", "Sacred-Ethics-Charter")
+    
+    # This code would be adapted into a GitHub Action triggered by 'issues.opened' or 'stars.created'
