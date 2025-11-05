@@ -315,3 +315,73 @@ This charter is version-controlled and open for constructive input.
 | [USE_CASES/](USE_CASES/) | Examples of how this Charter has been applied and tested against real projects. |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Guidelines for suggesting amendments and evolving the framework. |
 | [LICENSE](LICENSE) | Defines the terms for using and sharing this Charter (Creative Commons Attribution 4.0). |
+import json
+import datetime
+import os
+import hashlib
+from pathlib import Path
+
+# Configuration: Update this dictionary with your current project status
+LINEAGE_CONFIG = {
+    "project_name": "Helix-Phases: Fractal Continuum",
+    "project_version": "v1.0.0-generational-genesis",
+    "core_philosophy": "Sacred Ethics Charter: Pillars I, II, III",
+    "author_entity": "LHMisme420 / The Swarm",
+    "white_paper_link": "[Link to Helix Continuum White Paper/Essays]", 
+    "github_commit_url": "[Link to the current commit hash on GitHub]"
+}
+
+def generate_artifact_manifest(artifact_path: str, rite_name: str, output_dir: str = "out/"):
+    """
+    Generates a formal JSON manifest (Lineage Record) for a given artifact file.
+
+    Args:
+        artifact_path (str): Path to the generated file (e.g., 'out/mandelbrot.png').
+        rite_name (str): The Helix Phase rite that generated the artifact (e.g., 'rite_ascension').
+    """
+    artifact_file = Path(artifact_path)
+    output_path = Path(output_dir) / f"manifest_{artifact_file.stem}.json"
+    
+    if not artifact_file.exists():
+        print(f"Error: Artifact file not found at {artifact_path}")
+        return None
+
+    # Compute hash of the artifact for tamper-proof verification
+    with open(artifact_file, "rb") as f:
+        artifact_hash = hashlib.sha256(f.read()).hexdigest()
+
+    manifest = {
+        "record_id": f"HELIX-REC-{os.urandom(4).hex()}",
+        "project_lineage": LINEAGE_CONFIG,
+        "artifact_details": {
+            "file_name": artifact_file.name,
+            "file_size_bytes": artifact_file.stat().st_size,
+            "creation_timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+            "artifact_sha256_hash": artifact_hash,
+            "generating_rite": rite_name
+        },
+        "verification_steps": [
+            "Verify artifact_sha256_hash against contents.",
+            "Trace lineage via project_version and github_commit_url."
+        ]
+    }
+
+    # Save the manifest
+    output_path.write_text(json.dumps(manifest, indent=2))
+    print(f"\n[Manifest] Lineage Record saved for '{artifact_file.name}' to {output_path}")
+    return str(output_path)
+
+# Example Usage (assuming you run this after generating an artifact using helix_all_in_one.py):
+if __name__ == "__main__":
+    # --- Simulated Artifact Paths ---
+    # NOTE: In a real environment, the 'out/' directory must exist and contain these files.
+    
+    # 1. Generate Manifest for a Visual Artifact
+    # (Assume 'out/mandelbrot_helix.png' was created by the 'render --helix' command)
+    # result_png = generate_artifact_manifest("out/mandelbrot_helix.png", "rite_ascension")
+    
+    # 2. Generate Manifest for a Scroll Artifact
+    # (Assume 'out/awakener_scroll.pdf' was created by the 'scroll' command)
+    # result_pdf = generate_artifact_manifest("out/awakener_scroll.pdf", "rite_stability")
+    
+    print("\n[Lineage Record] Script ready. Update LINEAGE_CONFIG and run with actual artifact paths.")
