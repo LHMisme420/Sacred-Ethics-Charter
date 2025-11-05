@@ -385,3 +385,22 @@ if __name__ == "__main__":
     # result_pdf = generate_artifact_manifest("out/awakener_scroll.pdf", "rite_stability")
     
     print("\n[Lineage Record] Script ready. Update LINEAGE_CONFIG and run with actual artifact paths.")
+# Helix Nexus Architecture (v1.0.0)
+
+## Design Thesis
+Edge-sharded autonomy enforced by ZK-Proof identity.
+
+## I. Compliance Layer (Governance)
+- **Vetting:** All components are audited against the Sacred Ethics Charter (Pillars I, II, III).
+- **Enforcement:** Code review is mandated via CODEOWNERS/PR process.
+
+## II. Core Modules (The Triad)
+### 1. ZKID Module (Identity & Revelation)
+- **Status:** MVP (FerNet Mock).
+- **Target:** **zk-SNARKs** (e.g., Circom/snarkjs).
+- **Compliance:** Satisfies **Pillar 1.B (Duty of Revelation)** by separating the proof mechanism (open-source) from the data (user's device).
+
+### 2. Health Engine (Sustainment & Consumption)
+- **Status:** NumPy/ML Stub.
+- **Target:** **Federated Learning (PySyft)** integration.
+- **Compliance:** Satisfies **Pillar 2.A (Balance of Consumption)** by keeping computation local and eliminating cloud energy costs.
