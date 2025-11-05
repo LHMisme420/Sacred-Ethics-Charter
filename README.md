@@ -214,4 +214,13 @@ The potential high-resolution rendering and interactive nature of the installati
 3.  **Pillar 2.C Test (Regeneration):** As a further step toward compliance, the creator committed to funding the planting of one new tree for every hour of high-energy computation used in the **initial** rendering and minting process.
 
 ## The Resolution
-The creation was deemed ethically compliant **only after** the shift to low-energy interaction and the commitment to resource regeneration. This demonstrates the Charter's power to force design compromises in favor of sustainability.
+The creation was deemed ethically compliant **only after** the shift to low-energy interaction and the commitment to resource regeneration. This demonstrates the Charter's power to force design compromises in favor of sustainability.[![Build Status](https://github.com/LHMISME420/legion-nexus/actions/workflows/test_legion_nexus.yml/badge.svg)](https://github.com/LHMISME420/legion-nexus/actions/workflows/test_legion_nexus.yml)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Open Issues](https://img.shields.io/github/issues/LHMISME420/legion-nexus)](https://github.com/LHMISME420/legion-nexus/issues)
+[![Security Policy](https://img.shields.io/badge/Security-Policy-red)](SECURITY.md)
+
+---[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Governance](https://img.shields.io/badge/Standard-Ethical%20Governance-blue)](GOVERNANCE.md)
+[![Open Discussions](https://img.shields.io/github/discussions/LHMISME420/sacred-ethics-charter)](https://github.com/LHMISME420/sacred-ethics-charter/discussions)
+
+---
