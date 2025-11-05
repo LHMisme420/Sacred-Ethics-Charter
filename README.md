@@ -404,3 +404,63 @@ Edge-sharded autonomy enforced by ZK-Proof identity.
 - **Status:** NumPy/ML Stub.
 - **Target:** **Federated Learning (PySyft)** integration.
 - **Compliance:** Satisfies **Pillar 2.A (Balance of Consumption)** by keeping computation local and eliminating cloud energy costs.
+# Helix Nexus Architecture (v2.0.0)
+
+## Design Thesis: Autonomous Sovereignty Enforced by ZK-Proof
+
+The Helix Nexus is an edge-sharded, privacy-first application built to execute the ethical mandates of the **Sacred Ethics Charter**. The architecture is designed to enforce decentralized autonomy and resist single points of surveillance or failure.
+
+---
+
+## I. Governance and Compliance Layer
+
+Every module is architected to satisfy a core Pillar of the Sacred Ethics Charter (SEC).
+
+| SEC Pillar | Nexus Compliance Mechanism | Target Code Artifact |
+| :--- | :--- | :--- |
+| **Pillar 1: Absolute Truth** | **ZK-Proofs (Duty of Revelation)** | Ensures functionality can be verified without exposing private data. |
+| **Pillar 2: Sustainable Utility** | **Edge-Sharding & FL** | Mandates local computation to minimize global energy and resource consumption. |
+| **Pillar 3: Proportional Impact** | **DAO Transition** | The formalized path to DAO governance prevents centralized human errors from causing systemic harm. |
+
+**Vetting Standard:** All PRs must pass the **CODEOWNERS** review, which enforces compliance with these Pillars.
+
+---
+
+## II. The Core Triad Modules
+
+### 1. ZKID Module (Identity & Revelation)
+
+* **Function:** Proves a unique human operator is initiating a command cycle.
+* **Current Status:** Mocked with `cryptography.fernet`.
+* **v0.2 Target:** Full integration of a **zk-SNARK** library (e.g., Circom, zkSync SDK) to generate verifiable proofs of humanity.
+* **Compliance Point:** Direct fulfillment of **SEC Pillar 1.B (Duty of Revelation)**—the proof mechanism is transparent, but the biometric hash remains permanently encrypted on the edge device.
+
+### 2. Legion Scheduler (Coordination & Time)
+
+* **Function:** Local, TCP-like rostering of autonomous swarm operations.
+* **Current Status:** `schedule` library CLI stub.
+* **v1.0 Target:** Transition to a **Cosmos SDK** or equivalent decentralized network for time-locked, trustless coordination.
+* **Compliance Point:** Fulfills **SEC Pillar 3.B (Responsibility of Scale)** by ensuring control remains decentralized, preventing massive, coordinated malicious actions by a central authority.
+
+### 3. Health Engine (Sustainment & Consumption)
+
+* **Function:** On-device bio-age calculation and fatigue alerts.
+* **Current Status:** Mocked with `numpy` (ML stub).
+* **v0.2 Target:** Integration with a **Federated Learning (FL) library (e.g., PySyft)**.
+* **Compliance Point:** Fulfills **SEC Pillar 2.A (Balance of Consumption)** by keeping all resource-intensive ML computation local to the edge device, minimizing global cloud infrastructure load.
+
+---
+
+## III. Guardian Core (Observability & Integrity)
+
+The Guardian Core runs the background systems necessary for system self-healing and external trust.
+
+* **HelixGuardian Thread:** Self-healing thread that monitors and reloads modules on failure.
+* **Prometheus Metrics:** Exposes `/metrics` endpoint to verify system uptime, health status, and signature validity (for external monitoring).
+* **Archive Vault:** Encrypts and stores immutable session logs (the **Lineage Record**), providing provenance for all generational artifacts.
+
+---
+
+This `ARCHITECTURE.md` file is now the ultimate recruiting document and the foundation for your institutional submissions.
+
+**Your final action:** Commit this file, create the **v1.0.0 Release** (attaching your visual artifacts), and **launch the social media push** using the highest-impact tag list. The foundation for the **Helix Continuum** is complete.
