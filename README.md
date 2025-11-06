@@ -778,3 +778,73 @@ template CopilotAttestationCircuit() {
 }
 
 component main = CopilotAttestationCircuit();
+import hashlib
+import json
+from typing import Dict, List
+
+# --- Configuration: Replace with real blockchain/DAO contracts in v1.0 ---
+DAO_WALLET = "HELIX_DAO_0x789..."
+CONTRIBUTOR_POOL_ADDRESS = "0xABC456..."
+
+# --- Functionality: Simulates the ZK-Attestation Event ---
+
+def get_attested_fragment_info(fragment_id: str) -> Dict:
+    """
+    Simulates retrieving the cryptographic record created by the ZK-Attestation Circuit.
+    In production, this would be a blockchain query against the ZK-Proof output.
+    """
+    # Mock data showing 80% original source, 20% modification/LLM contribution
+    return {
+        "fragment_hash": hashlib.sha256(fragment_id.encode()).hexdigest(),
+        "origin_source_id": f"GH_REPO_{fragment_id[-4:]}",
+        "origin_author_handle": f"@GH_User_{fragment_id[0:4]}",
+        "contribution_split": {"original_author": 0.8, "dao_reserve": 0.1, "llm_user": 0.1},
+        "license_status": "CC_BY_4.0_VERIFIED"
+    }
+
+def process_compensation_event(fragment_id: str, usage_fee: float) -> List[Dict]:
+    """
+    Calculates and distributes micro-payments based on the attested provenance.
+    This fulfills SEC Pillar 3.B (Responsibility of Scale/Compensation).
+    """
+    info = get_attested_fragment_info(fragment_id)
+    transactions = []
+
+    # 1. Compensate Original Author
+    author_payment = usage_fee * info['contribution_split']['original_author']
+    transactions.append({
+        "recipient": info['origin_author_handle'],
+        "amount": round(author_payment, 5),
+        "purpose": "Original Code Compensation"
+    })
+
+    # 2. Fund Helix DAO Governance
+    dao_payment = usage_fee * info['contribution_split']['dao_reserve']
+    transactions.append({
+        "recipient": DAO_WALLET,
+        "amount": round(dao_payment, 5),
+        "purpose": "Helix Governance Reserve"
+    })
+    
+    # 3. Reward LLM User (Incentivize ethical use)
+    user_reward = usage_fee * info['contribution_split']['llm_user']
+    transactions.append({
+        "recipient": "LLM_User_Wallet_ID",
+        "amount": round(user_reward, 5),
+        "purpose": "Ethical Usage Reward"
+    })
+
+    print(f"\n[Compensated] Total Fee: ${usage_fee:.5f}")
+    print(json.dumps(transactions, indent=2))
+    return transactions
+
+# --- Execution ---
+if __name__ == "__main__":
+    print("--- DAO Compensation Simulation ---")
+    
+    # Simulate a user accepting a high-value code suggestion traced to a source
+    # The usage_fee is determined by Copilot/GitHub's monetization model.
+    COMPOSITE_FRAGMENT_ID = "42helixgenesis17" 
+    COST_PER_USE = 0.00125 # Example: $0.00125 per accepted suggestion
+    
+    process_compensation_event(COMPOSITE_FRAGMENT_ID, COST_PER_USE)
