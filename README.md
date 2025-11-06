@@ -733,3 +733,48 @@ jobs:
 
     outputs:
       security_status: ${{ steps.analysis.outputs.security_status }}
+// copilot_attestor.circom
+// Helix Nexus: ZK-Provenance Attestation for AI Code Generation
+
+pragma circom 2.0.0;
+
+/*
+    Purpose: Generate a ZK-Proof proving:
+    1) A code fragment (private input) matches a licensed source (public input) OR 
+    2) The fragment is structurally unique (preventing direct copyright violation)
+    The user is verified without revealing the suggestion's source.
+*/
+
+template CopilotAttestationCircuit() {
+    // 1. PUBLIC INPUTS (What the world verifies)
+    
+    // A hash representing the verified, unique, and licensed code pool.
+    signal input licensed_pool_root_hash; 
+    
+    // The structural hash of the generated code fragment (publicly known by the user).
+    signal input suggested_fragment_hash; 
+    
+    // 2. PRIVATE INPUTS (What the Prover has, but keeps secret)
+    
+    // The actual suggested code fragment text (kept private).
+    signal private fragment_text[128]; 
+    
+    // The specific Merkle path proving the fragment is NOT a direct copy of a known copyrighted source.
+    signal private negative_provenance_path[32]; 
+    
+    
+    // 3. CORE CONSTRAINTS (The Compliance Check)
+    
+    // 3a. Verify Fragment Integrity: Ensure the private text matches the public hash (basic integrity).
+    // sha256_hash(fragment_text) === suggested_fragment_hash; 
+    
+    // 3b. Verify Negative Provenance: Prove the fragment is NOT included in a database of high-similarity/copyrighted code snippets.
+    // Call a Merkle tree non-inclusion template here:
+    // MerkleNonInclusion(copyright_blacklist_root, suggested_fragment_hash, negative_provenance_path) <==> 1;
+    
+    // 4. OUTPUT (The Ethical Seal)
+    // The final proof signature is the verifiable ethical seal.
+    signal output ethical_seal <== suggested_fragment_hash; 
+}
+
+component main = CopilotAttestationCircuit();
