@@ -1,0 +1,6 @@
+zk:
+  enabled: true
+federated:
+  nodes: 3
+dao:
+  threshold: 0.6
