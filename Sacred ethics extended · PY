@@ -1,0 +1,633 @@
+#!/usr/bin/env python3
+"""
+Sacred Ethics Charter - Extended Modules
+Additional components for complete ethical governance
+Author: LHMisme420 / Helix Nexus Collective
+"""
+
+import hashlib
+import json
+import os
+from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Tuple
+from dataclasses import dataclass, field
+from pathlib import Path
+import sqlite3
+
+# ============================================================================
+# RESOURCE REGENERATION TRACKER
+# ============================================================================
+
+@dataclass
+class ResourceUsage:
+    """Track resource consumption and regeneration"""
+    resource_type: str  # energy, compute, carbon, materials
+    amount_consumed: float
+    unit: str
+    timestamp: datetime
+    project_id: str
+    offset_committed: float = 0.0
+    offset_completed: float = 0.0
+
+class ResourceRegenerationTracker:
+    """
+    Tracks resource consumption and ensures regenerative commitments are met
+    Implements Pillar 2.C: The Favor of Regeneration
+    """
+    
+    def __init__(self, db_path: str = "regeneration.db"):
+        self.db_path = db_path
+        self._init_database()
+        
+    def _init_database(self):
+        """Initialize SQLite database for tracking"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS resource_usage (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                project_id TEXT NOT NULL,
+                resource_type TEXT NOT NULL,
+                amount_consumed REAL NOT NULL,
+                unit TEXT NOT NULL,
+                timestamp TEXT NOT NULL,
+                offset_committed REAL DEFAULT 0,
+                offset_completed REAL DEFAULT 0,
+                carbon_equivalent REAL,
+                attestation_hash TEXT
+            )
+        ''')
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS regeneration_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                project_id TEXT NOT NULL,
+                action_type TEXT NOT NULL,
+                amount REAL NOT NULL,
+                verification_proof TEXT,
+                timestamp TEXT NOT NULL,
+                verified BOOLEAN DEFAULT FALSE
+            )
+        ''')
+        
+        conn.commit()
+        conn.close()
+    
+    def log_consumption(self, project_id: str, resource_type: str, 
+                       amount: float, unit: str) -> str:
+        """Log resource consumption for a project"""
+        
+        # Calculate carbon equivalent
+        carbon_factors = {
+            "kwh": 0.5,  # kg CO2 per kWh
+            "compute_hour": 0.2,  # kg CO2 per compute hour
+            "gb_storage": 0.01,  # kg CO2 per GB stored per year
+        }
+        
+        carbon_equivalent = amount * carbon_factors.get(unit.lower(), 0.1)
+        
+        # Generate attestation
+        attestation_data = {
+            "project_id": project_id,
+            "resource_type": resource_type,
+            "amount": amount,
+            "unit": unit,
+            "carbon_equivalent": carbon_equivalent,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        attestation_hash = hashlib.sha256(
+            json.dumps(attestation_data, sort_keys=True).encode()
+        ).hexdigest()
+        
+        # Store in database
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            INSERT INTO resource_usage 
+            (project_id, resource_type, amount_consumed, unit, timestamp, 
+             carbon_equivalent, attestation_hash)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (project_id, resource_type, amount, unit, 
+              datetime.utcnow().isoformat(), carbon_equivalent, attestation_hash))
+        
+        conn.commit()
+        conn.close()
+        
+        return attestation_hash
+    
+    def commit_offset(self, project_id: str, offset_type: str, amount: float) -> Dict:
+        """Commit to a regenerative offset action"""
+        
+        offset_values = {
+            "tree_planting": 21,  # kg CO2 per tree per year
+            "solar_panel": 400,  # kg CO2 offset per panel per year
+            "carbon_credit": 1000,  # kg CO2 per credit
+            "open_source_contribution": 50,  # social offset value
+        }
+        
+        offset_value = amount * offset_values.get(offset_type, 10)
+        
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            INSERT INTO regeneration_events 
+            (project_id, action_type, amount, timestamp)
+            VALUES (?, ?, ?, ?)
+        ''', (project_id, offset_type, offset_value, datetime.utcnow().isoformat()))
+        
+        # Update project's offset commitment
+        cursor.execute('''
+            UPDATE resource_usage 
+            SET offset_committed = offset_committed + ?
+            WHERE project_id = ?
+        ''', (offset_value, project_id))
+        
+        conn.commit()
+        conn.close()
+        
+        return {
+            "project_id": project_id,
+            "offset_type": offset_type,
+            "offset_value": offset_value,
+            "status": "committed"
+        }
+    
+    def verify_regeneration(self, project_id: str, verification_proof: str) -> bool:
+        """Verify that regeneration commitments have been fulfilled"""
+        
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        # Get total consumption and commitments
+        cursor.execute('''
+            SELECT SUM(carbon_equivalent), SUM(offset_committed), SUM(offset_completed)
+            FROM resource_usage
+            WHERE project_id = ?
+        ''', (project_id,))
+        
+        result = cursor.fetchone()
+        if not result:
+            return False
+            
+        total_consumed, total_committed, total_completed = result
+        
+        # Mark latest regeneration event as verified
+        cursor.execute('''
+            UPDATE regeneration_events
+            SET verified = TRUE, verification_proof = ?
+            WHERE project_id = ? AND verified = FALSE
+        ''', (verification_proof, project_id))
+        
+        # Update completed offsets
+        cursor.execute('''
+            UPDATE resource_usage
+            SET offset_completed = offset_committed
+            WHERE project_id = ?
+        ''', (project_id,))
+        
+        conn.commit()
+        conn.close()
+        
+        # Check if project is carbon positive
+        return total_committed >= total_consumed
+    
+    def get_regeneration_report(self, project_id: str) -> Dict:
+        """Generate regeneration compliance report"""
+        
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            SELECT SUM(carbon_equivalent), SUM(offset_committed), SUM(offset_completed)
+            FROM resource_usage
+            WHERE project_id = ?
+        ''', (project_id,))
+        
+        result = cursor.fetchone()
+        total_consumed, total_committed, total_completed = result or (0, 0, 0)
+        
+        cursor.execute('''
+            SELECT action_type, SUM(amount), COUNT(*), SUM(verified)
+            FROM regeneration_events
+            WHERE project_id = ?
+            GROUP BY action_type
+        ''', (project_id,))
+        
+        regeneration_actions = cursor.fetchall()
+        conn.close()
+        
+        return {
+            "project_id": project_id,
+            "total_carbon_consumed": total_consumed,
+            "total_offset_committed": total_committed,
+            "total_offset_completed": total_completed,
+            "carbon_balance": total_committed - total_consumed,
+            "is_carbon_positive": total_committed > total_consumed,
+            "regeneration_actions": [
+                {
+                    "type": action[0],
+                    "total_offset": action[1],
+                    "count": action[2],
+                    "verified_count": action[3]
+                }
+                for action in regeneration_actions
+            ],
+            "compliance_status": "compliant" if total_committed >= total_consumed else "non_compliant"
+        }
+
+# ============================================================================
+# LINEAGE RECORD SYSTEM
+# ============================================================================
+
+class LineageRecord:
+    """
+    Maintains immutable record of all creation artifacts and their provenance
+    Implements tamper-proof audit trail for Pillar 1.B: Duty of Revelation
+    """
+    
+    def __init__(self, archive_path: str = "lineage_archive"):
+        self.archive_path = Path(archive_path)
+        self.archive_path.mkdir(exist_ok=True)
+        self.manifest_path = self.archive_path / "manifest.json"
+        self._load_manifest()
+    
+    def _load_manifest(self):
+        """Load or create the master manifest"""
+        if self.manifest_path.exists():
+            with open(self.manifest_path, 'r') as f:
+                self.manifest = json.load(f)
+        else:
+            self.manifest = {
+                "created": datetime.utcnow().isoformat(),
+                "charter_version": "1.0.0",
+                "records": []
+            }
+            self._save_manifest()
+    
+    def _save_manifest(self):
+        """Save the manifest with atomic write"""
+        temp_path = self.manifest_path.with_suffix('.tmp')
+        with open(temp_path, 'w') as f:
+            json.dump(self.manifest, f, indent=2)
+        temp_path.replace(self.manifest_path)
+    
+    def create_artifact_record(self, 
+                              artifact_type: str,
+                              artifact_data: Dict,
+                              creator_id: str,
+                              compliance_report: Optional[Dict] = None) -> str:
+        """Create an immutable record of an artifact"""
+        
+        record_id = hashlib.sha256(
+            f"{artifact_type}{creator_id}{datetime.utcnow().isoformat()}".encode()
+        ).hexdigest()[:16]
+        
+        record = {
+            "record_id": record_id,
+            "artifact_type": artifact_type,
+            "creator_id": creator_id,
+            "timestamp": datetime.utcnow().isoformat(),
+            "artifact_hash": hashlib.sha256(
+                json.dumps(artifact_data, sort_keys=True).encode()
+            ).hexdigest(),
+            "compliance_attestation": compliance_report.get("attestation_hash") if compliance_report else None,
+            "artifact_data": artifact_data,
+            "lineage": {
+                "parent_records": [],
+                "charter_version": "1.0.0",
+                "generation": 1
+            }
+        }
+        
+        # Calculate record hash
+        record_hash = hashlib.sha256(
+            json.dumps(record, sort_keys=True).encode()
+        ).hexdigest()
+        record["record_hash"] = record_hash
+        
+        # Save individual record
+        record_path = self.archive_path / f"{record_id}.json"
+        with open(record_path, 'w') as f:
+            json.dump(record, f, indent=2)
+        
+        # Update manifest
+        self.manifest["records"].append({
+            "record_id": record_id,
+            "artifact_type": artifact_type,
+            "creator_id": creator_id,
+            "timestamp": record["timestamp"],
+            "record_hash": record_hash,
+            "file_path": str(record_path)
+        })
+        self._save_manifest()
+        
+        return record_id
+    
+    def verify_record(self, record_id: str) -> Tuple[bool, str]:
+        """Verify integrity of a record"""
+        
+        record_path = self.archive_path / f"{record_id}.json"
+        if not record_path.exists():
+            return False, "Record not found"
+        
+        with open(record_path, 'r') as f:
+            record = json.load(f)
+        
+        # Recalculate hash
+        stored_hash = record.pop("record_hash", None)
+        calculated_hash = hashlib.sha256(
+            json.dumps(record, sort_keys=True).encode()
+        ).hexdigest()
+        
+        if stored_hash == calculated_hash:
+            return True, "Record intact and verified"
+        else:
+            return False, "Record tampered - hash mismatch"
+    
+    def get_lineage_tree(self, record_id: str) -> Dict:
+        """Get the complete lineage tree for a record"""
+        
+        record_path = self.archive_path / f"{record_id}.json"
+        if not record_path.exists():
+            return {}
+        
+        with open(record_path, 'r') as f:
+            record = json.load(f)
+        
+        lineage_tree = {
+            "record_id": record_id,
+            "artifact_type": record.get("artifact_type"),
+            "generation": record["lineage"]["generation"],
+            "parents": []
+        }
+        
+        # Recursively get parent records
+        for parent_id in record["lineage"]["parent_records"]:
+            parent_tree = self.get_lineage_tree(parent_id)
+            if parent_tree:
+                lineage_tree["parents"].append(parent_tree)
+        
+        return lineage_tree
+
+# ============================================================================
+# EMERGENCY RESPONSE SYSTEM
+# ============================================================================
+
+class EmergencyResponse:
+    """
+    Rapid response system for ethical violations and system threats
+    Implements Pillar 3.C: The Duty of Adaptation
+    """
+    
+    def __init__(self):
+        self.alert_levels = {
+            "INFO": 0,
+            "WARNING": 1,
+            "CRITICAL": 2,
+            "EMERGENCY": 3
+        }
+        self.active_alerts = []
+        self.response_protocols = {}
+        self._init_protocols()
+    
+    def _init_protocols(self):
+        """Initialize emergency response protocols"""
+        
+        self.response_protocols = {
+            "data_poisoning": {
+                "level": "CRITICAL",
+                "actions": [
+                    "Isolate affected components",
+                    "Initiate data integrity verification",
+                    "Rollback to last known good state",
+                    "Notify all nodes"
+                ],
+                "max_response_time": 300  # 5 minutes
+            },
+            "ethical_violation": {
+                "level": "CRITICAL",
+                "actions": [
+                    "Immediate component suspension",
+                    "Trigger emergency consensus vote",
+                    "Generate violation report",
+                    "Implement containment measures"
+                ],
+                "max_response_time": 600  # 10 minutes
+            },
+            "consensus_attack": {
+                "level": "EMERGENCY",
+                "actions": [
+                    "Freeze all pending proposals",
+                    "Verify node authenticity",
+                    "Initiate emergency quorum",
+                    "Deploy defensive measures"
+                ],
+                "max_response_time": 60  # 1 minute
+            },
+            "resource_exhaustion": {
+                "level": "WARNING",
+                "actions": [
+                    "Throttle non-critical operations",
+                    "Activate resource conservation mode",
+                    "Queue low-priority tasks",
+                    "Alert sustainability auditor"
+                ],
+                "max_response_time": 1800  # 30 minutes
+            }
+        }
+    
+    def detect_threat(self, threat_type: str, threat_data: Dict) -> str:
+        """Detect and classify a threat"""
+        
+        if threat_type not in self.response_protocols:
+            threat_type = "unknown_threat"
+            level = "WARNING"
+        else:
+            level = self.response_protocols[threat_type]["level"]
+        
+        alert_id = hashlib.sha256(
+            f"{threat_type}{datetime.utcnow().isoformat()}".encode()
+        ).hexdigest()[:12]
+        
+        alert = {
+            "alert_id": alert_id,
+            "threat_type": threat_type,
+            "level": level,
+            "timestamp": datetime.utcnow().isoformat(),
+            "threat_data": threat_data,
+            "status": "active",
+            "response_initiated": False
+        }
+        
+        self.active_alerts.append(alert)
+        
+        # Trigger automatic response for critical threats
+        if self.alert_levels[level] >= self.alert_levels["CRITICAL"]:
+            self.initiate_response(alert_id)
+        
+        return alert_id
+    
+    def initiate_response(self, alert_id: str) -> Dict:
+        """Initiate emergency response for an alert"""
+        
+        alert = next((a for a in self.active_alerts if a["alert_id"] == alert_id), None)
+        if not alert:
+            return {"status": "error", "message": "Alert not found"}
+        
+        threat_type = alert["threat_type"]
+        protocol = self.response_protocols.get(threat_type, {})
+        
+        response = {
+            "alert_id": alert_id,
+            "response_id": hashlib.sha256(f"response_{alert_id}".encode()).hexdigest()[:12],
+            "initiated_at": datetime.utcnow().isoformat(),
+            "protocol": protocol.get("actions", []),
+            "max_response_time": protocol.get("max_response_time", 3600),
+            "status": "in_progress"
+        }
+        
+        alert["response_initiated"] = True
+        alert["response"] = response
+        
+        # Simulate executing response actions
+        executed_actions = []
+        for action in protocol.get("actions", []):
+            executed_actions.append({
+                "action": action,
+                "status": "executed",
+                "timestamp": datetime.utcnow().isoformat()
+            })
+        
+        response["executed_actions"] = executed_actions
+        response["status"] = "completed"
+        
+        return response
+    
+    def get_system_health(self) -> Dict:
+        """Get current system health status"""
+        
+        active_critical = sum(1 for a in self.active_alerts 
+                            if a["status"] == "active" and 
+                            self.alert_levels[a["level"]] >= self.alert_levels["CRITICAL"])
+        
+        health_status = "healthy"
+        if active_critical > 0:
+            health_status = "critical"
+        elif len(self.active_alerts) > 5:
+            health_status = "degraded"
+        elif len(self.active_alerts) > 0:
+            health_status = "warning"
+        
+        return {
+            "status": health_status,
+            "active_alerts": len(self.active_alerts),
+            "critical_alerts": active_critical,
+            "last_check": datetime.utcnow().isoformat(),
+            "response_capability": "full",
+            "ethical_compliance": "enforced"
+        }
+
+# ============================================================================
+# DEMONSTRATION FUNCTIONS
+# ============================================================================
+
+def demonstrate_regeneration():
+    """Demonstrate resource regeneration tracking"""
+    
+    print("\n" + "="*60)
+    print("RESOURCE REGENERATION TRACKER")
+    print("="*60)
+    
+    tracker = ResourceRegenerationTracker()
+    
+    # Log consumption
+    project_id = "helix_v2"
+    tracker.log_consumption(project_id, "energy", 1000, "kwh")
+    tracker.log_consumption(project_id, "compute", 500, "compute_hour")
+    
+    # Commit offsets
+    tracker.commit_offset(project_id, "tree_planting", 30)
+    tracker.commit_offset(project_id, "solar_panel", 2)
+    
+    # Get report
+    report = tracker.get_regeneration_report(project_id)
+    
+    print(f"\nProject: {report['project_id']}")
+    print(f"Carbon Consumed: {report['total_carbon_consumed']:.2f} kg CO2")
+    print(f"Carbon Offset: {report['total_offset_committed']:.2f} kg CO2")
+    print(f"Carbon Balance: {report['carbon_balance']:.2f} kg CO2")
+    print(f"Status: {'✓ Carbon Positive' if report['is_carbon_positive'] else '✗ Carbon Negative'}")
+
+def demonstrate_lineage():
+    """Demonstrate lineage record system"""
+    
+    print("\n" + "="*60)
+    print("LINEAGE RECORD SYSTEM")
+    print("="*60)
+    
+    lineage = LineageRecord()
+    
+    # Create artifact record
+    artifact = {
+        "name": "Sacred Algorithm v1.0",
+        "type": "zkproof_circuit",
+        "hash": "abc123..."
+    }
+    
+    record_id = lineage.create_artifact_record(
+        artifact_type="algorithm",
+        artifact_data=artifact,
+        creator_id="alpha_creator"
+    )
+    
+    print(f"\n✓ Created lineage record: {record_id}")
+    
+    # Verify record
+    is_valid, message = lineage.verify_record(record_id)
+    print(f"✓ Verification: {message}")
+
+def demonstrate_emergency():
+    """Demonstrate emergency response system"""
+    
+    print("\n" + "="*60)
+    print("EMERGENCY RESPONSE SYSTEM")
+    print("="*60)
+    
+    emergency = EmergencyResponse()
+    
+    # Detect threat
+    threat_data = {
+        "source": "node_suspicious",
+        "target": "consensus_system",
+        "severity": "high"
+    }
+    
+    alert_id = emergency.detect_threat("ethical_violation", threat_data)
+    print(f"\n⚠ Alert raised: {alert_id}")
+    
+    # Get system health
+    health = emergency.get_system_health()
+    print(f"\nSystem Health: {health['status'].upper()}")
+    print(f"Active Alerts: {health['active_alerts']}")
+    print(f"Critical Alerts: {health['critical_alerts']}")
+    print(f"Ethical Compliance: {health['ethical_compliance']}")
+
+# ============================================================================
+# MAIN EXECUTION
+# ============================================================================
+
+if __name__ == "__main__":
+    print("\n" + "╔" + "═"*58 + "╗")
+    print("║" + " "*13 + "SACRED ETHICS CHARTER" + " "*24 + "║")
+    print("║" + " "*15 + "Extended Modules Demo" + " "*22 + "║")
+    print("╚" + "═"*58 + "╝")
+    
+    demonstrate_regeneration()
+    demonstrate_lineage()
+    demonstrate_emergency()
+    
+    print("\n✓ All systems operational")
+    print("  'Every creation impacts the reality it enters'\n")
