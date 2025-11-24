@@ -1,850 +1,742 @@
-# Sacred-Ethics-Charter
-Ethics Charter
-File/Directory,Purpose
-./CHARTER/CHARTER.md,"The complete, canonical source text of the Sacred Ethics Charter."
-./PRINCIPLES/,"Individual markdown files for each of the core ethical principles, easy for citation."
-./USE_CASES/,Examples of how this Charter has been applied and tested against real projects.
-CONTRIBUTING.md,Guidelines for suggesting amendments and evolving the framework.
-LICENSE,Defines the terms for using and sharing this Charter (Creative Commons Attribution).
-# Sacred-Ethics-Charter
+#!/usr/bin/env python3
+"""
+Sacred Ethics Charter - Unified Implementation
+Complete ethical governance system with assessment, consensus, and enforcement
+Author: LHMisme420 / Helix Nexus Collective
+"""
 
-## 🧭 The Blueprint for Conscious Creation
-
-A dynamic, open-source ethical mandate for developers, artists, and innovators who recognize that immense creative power demands **absolute moral accountability**.
-
-This repository hosts the **Sacred Ethics Charter**, a comprehensive framework designed to vet, guide, and ensure that all new creations—whether digital, material, or conceptual—are inherently **good, sustainable, and responsible.**
-
-We acknowledge that the fundamental "deal" on creation is a contract involving resource conversion, moral duty, and uncontrollable impact. This Charter is the mechanism we use to honor that contract.
-
----
-
-### Why This Charter Exists
-
-Every act of creation is a statement. This document serves three core functions:
-
-1.  **Guidance:** It provides clear, actionable principles (The Sacred Principles) against which all creative decisions must be measured.
-2.  **Accountability:** It forces a confrontation between **creator intent** and **real-world impact**, establishing a clear audit trail for ethical decision-making.
-3.  **Longevity:** It ensures that our creative legacy is built on a foundation of integrity and responsibility, mitigating unintended consequences for future generations.
-
----
-
-### Repository Structure
-
-This charter is version-controlled and open for constructive input.
-
-| File/Directory | Purpose |
-| :--- | :--- |
-| **`./CHARTER/CHARTER.md`** | The complete, canonical source text of the Sacred Ethics Charter. |
-| **`./PRINCIPLES/`** | Individual markdown files for each of the core ethical principles, easy for citation. |
-| **`./USE_CASES/`** | Examples of how this Charter has been applied and tested against real projects. |
-| **`CONTRIBUTING.md`** | Guidelines for suggesting amendments and evolving the framework. |
-| **`LICENSE`** | Defines the terms for using and sharing this Charter (Creative Commons Attribution 4.0). |
-
----
-
-### Contribution
-
-We welcome feedback, suggested amendments, and practical use cases that test the limits of these principles. Please review the **`CONTRIBUTING.md`** file before submitting pull requests.
-# I. The Covenant of Conscious Creation
-
-## Preamble
-
-We, the creators, recognize that the power to generate novelty—be it technological, artistic, or intellectual—is not a right, but a **sacred responsibility**. Every creation impacts the reality it enters. This Charter serves as the unwavering moral contract between the Creator and Creation, designed to ensure that all endeavors enrich existence, preserve integrity, and anticipate future well-being.
-
----
-
-# II. The Foundational Pillars
-
-The Charter is built upon three pillars that govern the relationship between intent, resource, and outcome.
-
-## Pillar 1: Pillar of Absolute Truth and Integrity (Principle of Intent)
-
-**Mandate:** Every creation must possess an intrinsic alignment with reality and uphold transparency in its purpose and function.
-
-### A. The Requirement of Honesty
-Creations must clearly represent their actual capabilities and limitations. Deception, misleading representation, or intentional obfuscation of function are strictly forbidden.
-
-### B. The Duty of Revelation
-The core mechanisms and data used to drive a creation must be auditable, accessible, and understandable to those impacted by it, to the maximum extent possible without compromising security.
-
-### C. The Prohibition of Malice
-Creations must never be designed with the primary, singular intent of causing systemic suffering, erosion of trust, or irreversible damage to the human spirit or body.
-
----
-
-## Pillar 2: Pillar of Sustainable Utility (Principle of Resource)
-
-**Mandate:** Creations must be net positive in their contribution, balancing utility for the present against the stewardship required for the future.
-
-### A. The Balance of Consumption
-The resources (material, energy, intellectual effort) consumed by a creation must be proportionate to the real, demonstrable benefit it provides to society or the ecosystem.
-
-### B. The Imperative of Non-Waste
-Creations must be designed for longevity, repairability, and responsible eventual dissolution or recycling. Obsolescence by design is an ethical failure.
-
-### C. The Favor of Regeneration
-Where possible, creations must actively contribute to the restoration or
-# Contributing to the Sacred Ethics Charter
-
-The Sacred Ethics Charter is a **foundational document** guiding responsible creation. Its integrity and longevity depend on rigorous, thoughtful input from the global community of developers, artists, and innovators.
-
-We welcome contributions, but due to the serious nature of this framework, all submissions are held to a **higher standard of philosophical and practical rigor.**
-
----
-
-## ⚠️ Our Core Requirement: High Rigor
-
-This is not a space for minor grammatical corrections alone. Every submission must address a specific ethical challenge or ambiguity.
-
-### 1. Amendments (Changing the Charter Text)
-
-If you propose an amendment to the text in `./CHARTER/CHARTER.md` or any of the `./PRINCIPLES/` files, your Pull Request (PR) **must include:**
-
-* **A "Philosophical Rationale":** A detailed explanation of which foundational principle (Pillar 1, 2, or 3) is currently insufficient or problematic, and why your change resolves that ethical gap.
-* **The "Consequence Test":** A brief analysis of how your proposed change affects the Charter’s internal consistency and what new unintended consequences the change itself might introduce.
-* **Referenced Use Case:** If possible, link the necessity of your amendment to a specific failure or ambiguity within a real-world or conceptual **Use Case**.
-
-### 2. Submitting Use Cases
-
-The `./USE_CASES/` directory is essential for testing the Charter's effectiveness. Use Cases must be submitted as new markdown files (`new_case_name.md`) and must detail:
-
-* **The Creation:** A brief description of the technology, artwork, or concept being analyzed.
-* **The Challenge:** Which Principle was difficult to satisfy, or which conflict (e.g., Pillar 2.A vs. Pillar 3.C) was encountered during development or deployment.
-* **The Resolution:** How the Charter successfully guided the decision, or where the Charter failed to provide adequate guidance (thus justifying a potential Amendment).
-
-### 3. General Contributions
-
-For minor corrections (typos, clarity improvements, formatting) that do not alter the ethical substance:
-
-* Label your PR clearly as **[CLARITY/TYPO]**.
-* These will be reviewed and merged promptly by the Charter Stewards.
-
----
-
-## 🚀 How to Submit
-
-1.  **Fork** this repository.
-2.  Create a descriptive **branch** (e.g., `amend/pillar-2-sustainability-clarification`).
-3.  Make your changes, ensuring you meet the **High Rigor** requirements above.
-4.  Submit a **Pull Request** and clearly reference the section of the Charter you are addressing.
-
-**Note:** Discussions
-# I. The Covenant of Conscious Creation
-
-## Preamble
-
-We, the creators, recognize that the power to generate novelty—be it technological, artistic, or intellectual—is not a right, but a **sacred responsibility**. Every creation impacts the reality it enters. This Charter serves as the unwavering moral contract between the Creator and Creation, designed to ensure that all endeavors enrich existence, preserve integrity, and anticipate future well-being.
-
----
-
-# II. The Foundational Pillars
-
-The Charter is built upon three pillars that govern the relationship between intent, resource, and outcome.
-
-## Pillar 1: Pillar of Absolute Truth and Integrity (Principle of Intent)
-
-**Mandate:** Every creation must possess an intrinsic alignment with reality and uphold transparency in its purpose and function.
-
-### A. The Requirement of Honesty
-Creations must clearly represent their actual capabilities and limitations. Deception, misleading representation, or intentional obfuscation of function are strictly forbidden.
-
-### B. The Duty of Revelation
-The core mechanisms and data used to drive a creation must be auditable, accessible, and understandable to those impacted by it, to the maximum extent possible without compromising security.
-
-### C. The Prohibition of Malice
-Creations must never be designed with the primary, singular intent of causing systemic suffering, erosion of trust, or irreversible damage to the human spirit or body.
-
----
-
-## Pillar 2: Pillar of Sustainable Utility (Principle of Resource)
-
-**Mandate:** Creations must be net positive in their contribution, balancing utility for the present against the stewardship required for the future.
-
-### A. The Balance of Consumption
-The resources (material, energy, intellectual effort) consumed by a creation must be proportionate to the real, demonstrable benefit it provides to society or the ecosystem.
-
-### B. The Imperative of Non-Waste
-Creations must be designed for longevity, repairability, and responsible eventual dissolution or recycling. Obsolescence by design is an ethical failure.
-
-### C. The Favor of Regeneration
-Where possible, creations must actively contribute to the restoration or preservation of natural systems, rather than simply minimizing harm.
-
----
-
-## Pillar 3: Pillar of Proportional Impact (Principle of Outcome)
-
-**Mandate:** Creators must anticipate and take ownership of the full range of a creation's effects, ensuring the impact is always proportional to the anticipated positive utility.
-
-### A. The Law of Unintended Consequence Foresight
-Creators are obligated to perform rigorous, proactive stress-testing to identify and mitigate reasonably foreseeable negative impacts *before* release. Mitigation planning must be part of the design process.
-
-### B. The Responsibility of Scale
-As a creation's influence grows (scaling), the creator's ethical vigilance must increase proportionally. Widespread systemic failure caused by neglect is the highest ethical infraction.
-
-### C. The Duty of Adaptation
-If negative, unforeseen consequences manifest, the creator must prioritize the repair, redesign, or decommissioning of the creation over profit or prestige.
-
----
-
-# III. Ethical Balance
-
-This Charter is a living document. The principles herein are designed to work in synergy, creating an **Ethical Balance**. Should any creation fail a mandated principle without clear, documented justification, it must be halted, redesigned, or repurposed.
-# Pillar 1.C: The Prohibition of Malice
-
-## Source
-Pillar 1: Pillar of Absolute Truth and Integrity (Principle of Intent)
-
-## Text
-Creations must never be designed with the primary, singular intent of causing systemic suffering, erosion of trust, or irreversible damage to the human spirit or body.
-
-## Interpretation
-This principle establishes the **non-negotiable boundary** of ethical creation. While negative externalities (unintended harm) are addressed by Pillar 3, this mandates that the **core purpose** of the creation must be benevolent or neutral. Any creation primarily designed as a weapon of widespread spiritual, social, or physical harm violates this foundational principle and is ethically inadmissible.
-# Use Case 001: The Garden of Ephemeral Dawn (Digital Art Installation)
-
-## The Creation
-The "Garden of Ephemeral Dawn" is a conceptual, high-fidelity digital art installation featuring nine unique, floating, symbolic cubes (NFTs) intended to represent complex philosophical concepts.
-
-## The Challenge
-The potential high-resolution rendering and interactive nature of the installation presented a conflict with **Pillar 2.A (Balance of Consumption)**, given the immense computational and electrical resources required to sustain and render such a project globally.
-
-## The Vetting Process
-
-1.  **Pillar 2.A Test (Consumption):** Initial projections suggested the energy consumption for sustained, interactive rendering exceeded the utility of a purely aesthetic experience. **Ethical Failure.**
-2.  **Mitigation:** The design was amended to prioritize **pre-rendered, static assets** for display, shifting interaction to a **low-energy "narrative mode"** activated only upon user request.
-3.  **Pillar 2.C Test (Regeneration):** As a further step toward compliance, the creator committed to funding the planting of one new tree for every hour of high-energy computation used in the **initial** rendering and minting process.
-
-## The Resolution
-The creation was deemed ethically compliant **only after** the shift to low-energy interaction and the commitment to resource regeneration. This demonstrates the Charter's power to force design compromises in favor of sustainability.[![Build Status](https://github.com/LHMISME420/legion-nexus/actions/workflows/test_legion_nexus.yml/badge.svg)](https://github.com/LHMISME420/legion-nexus/actions/workflows/test_legion_nexus.yml)
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Open Issues](https://img.shields.io/github/issues/LHMISME420/legion-nexus)](https://github.com/LHMISME420/legion-nexus/issues)
-[![Security Policy](https://img.shields.io/badge/Security-Policy-red)](SECURITY.md)
-
----[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Governance](https://img.shields.io/badge/Standard-Ethical%20Governance-blue)](GOVERNANCE.md)
-[![Open Discussions](https://img.shields.io/github/discussions/LHMISME420/sacred-ethics-charter)](https://github.com/LHMISME420/sacred-ethics-charter/discussions)
-
----### Proof of Concept: The Power to Compromise
-
-The Sacred Ethics Charter is not a passive document; it is a **design enforcement tool.** It provides no ethical compliance unless the creator can prove adherence to all three Pillars.
-
-**Case Study: The Garden of Ephemeral Dawn**
-
-This conceptual digital art installation initially failed the **Pillar 2.A (Balance of Consumption)** test due to immense energy requirements for continuous high-fidelity rendering.
-
-* **The Mandate:** The Charter forced the creators to halt the design.
-* **The Compromise:** Compliance was only achieved after a fundamental design shift—prioritizing **low-energy interaction** and committing to **resource regeneration** (funding tree planting for rendering hours).
-
-The truth is, ethical creation often requires compromises in design, scale, or profit. This Charter provides the necessary **moral authority** to enforce those difficult decisions in favor of **sustainability.**
-
----# CODEOWNERS - Legion Nexus: Op Unified Pulse
-# This file dictates which users or teams are responsible for code review 
-# in different parts of the repository. This structure is foundational 
-# for future decentralized governance (DAO).
-
-# **********************************************
-# CORE GOVERNANCE AND HIGH-LEVEL FILES (Initial Maintainer)
-# All top-level files require sign-off from the primary maintainer.
-/README.md          @LHMisme420
-/LICENSE            @LHMisme420
-/SECURITY.md        @LHMisme420
-/GOVERNANCE.md      @LHMisme420
-
-# **********************************************
-# MODULE OWNERS (Future DAO Working Groups)
-
-# ZKID Module - Zero-Knowledge/Cryptography
-/zk_id.py           @LHMisme420 # Placeholder: Future ZK Working Group
-/tests/test_zkid.py @LHMisme420
-
-# Scheduler Module - Coordination/Time/Networking
-/scheduler.py       @LHMisme420 # Placeholder: Future Swarm Ops Team
-/tests/test_scheduler.py @LHMisme420
-
-# Health Engine Module - Federated Learning/AI/NumPy
-/health_nudge.py    @LHMisme420 # Placeholder: Future Health ML Group
-/tests/test_health_nudge.py @LHMisme420
-
-# Workflow and Tooling
-/.github/workflows/  @LHMisme420 # Placeholder: Future Infra Team
-/requirements.txt    @LHMisme420
-
-# Note: Once the DAO transition occurs (v1.0), these usernames will be 
-# replaced by GitHub Teams representing the voted-in maintainers.
-# CODEOWNERS - Legion Nexus: Op Unified Pulse
-# This file dictates which users or teams are responsible for code review 
-# in different parts of the repository. This structure is foundational 
-# for future decentralized governance (DAO).
-
-# **********************************************
-# CORE GOVERNANCE AND HIGH-LEVEL FILES (Initial Maintainer)
-# All top-level files require sign-off from the primary maintainer.
-/README.md          @LHMisme420
-/LICENSE            @LHMisme420
-/SECURITY.md        @LHMisme420
-/GOVERNANCE.md      @LHMisme420
-
-# **********************************************
-# MODULE OWNERS (Future DAO Working Groups)
-
-# ZKID Module - Zero-Knowledge/Cryptography
-/zk_id.py           @LHMisme420 # Placeholder: Future ZK Working Group
-/tests/test_zkid.py @LHMisme420
-
-# Scheduler Module - Coordination/Time/Networking
-/scheduler.py       @LHMisme420 # Placeholder: Future Swarm Ops Team
-/tests/test_scheduler.py @LHMisme420
-
-# Health Engine Module - Federated Learning/AI/NumPy
-/health_nudge.py    @LHMisme420 # Placeholder: Future Health ML Group
-/tests/test_health_nudge.py @LHMisme420
-
-# Workflow and Tooling
-/.github/workflows/  @LHMisme420 # Placeholder: Future Infra Team
-/requirements.txt    @LHMisme420
-
-# Note: Once the DAO transition occurs (v1.0), these usernames will be 
-# replaced by GitHub Teams representing the voted-in maintainers.
-### Repository Structure
-
-This charter is version-controlled and open for constructive input.
-
-| File/Directory | Purpose |
-| :--- | :--- |
-| [CHARTER/CHARTER.md](CHARTER/CHARTER.md) | The complete, canonical source text of the Sacred Ethics Charter. |
-| [PRINCIPLES/](PRINCIPLES/) | Individual markdown files for each of the core ethical principles, easy for citation. |
-| [USE_CASES/](USE_CASES/) | Examples of how this Charter has been applied and tested against real projects. |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Guidelines for suggesting amendments and evolving the framework. |
-| [LICENSE](LICENSE) | Defines the terms for using and sharing this Charter (Creative Commons Attribution 4.0). |
-import json
-import datetime
-import os
 import hashlib
-from pathlib import Path
+import json
+import asyncio
+import random
+from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Tuple
+from dataclasses import dataclass, field
+from enum import Enum
+import argparse
 
-# Configuration: Update this dictionary with your current project status
-LINEAGE_CONFIG = {
-    "project_name": "Helix-Phases: Fractal Continuum",
-    "project_version": "v1.0.0-generational-genesis",
-    "core_philosophy": "Sacred Ethics Charter: Pillars I, II, III",
-    "author_entity": "LHMisme420 / The Swarm",
-    "white_paper_link": "[Link to Helix Continuum White Paper/Essays]", 
-    "github_commit_url": "[Link to the current commit hash on GitHub]"
-}
+# ============================================================================
+# CORE ENUMERATIONS
+# ============================================================================
 
-def generate_artifact_manifest(artifact_path: str, rite_name: str, output_dir: str = "out/"):
-    """
-    Generates a formal JSON manifest (Lineage Record) for a given artifact file.
+class Pillar(Enum):
+    """The Three Sacred Pillars"""
+    TRUTH = "Absolute Truth and Integrity"
+    UTILITY = "Sustainable Utility" 
+    IMPACT = "Proportional Impact"
 
-    Args:
-        artifact_path (str): Path to the generated file (e.g., 'out/mandelbrot.png').
-        rite_name (str): The Helix Phase rite that generated the artifact (e.g., 'rite_ascension').
-    """
-    artifact_file = Path(artifact_path)
-    output_path = Path(output_dir) / f"manifest_{artifact_file.stem}.json"
+class ViolationSeverity(Enum):
+    """Severity levels for ethical violations"""
+    MINOR = 1
+    MAJOR = 2
+    CRITICAL = 3
+
+class ProposalType(Enum):
+    """Types of proposals requiring swarm consensus"""
+    CHARTER_AMENDMENT = "charter_amendment"
+    PROJECT_APPROVAL = "project_approval"
+    RESOURCE_ALLOCATION = "resource_allocation"
+    EMERGENCY_HALT = "emergency_halt"
+    GOVERNANCE_CHANGE = "governance_change"
+    ETHICAL_VIOLATION = "ethical_violation"
+
+class VoteOption(Enum):
+    """Voting options for consensus"""
+    APPROVE = "approve"
+    REJECT = "reject"
+    ABSTAIN = "abstain"
+    BLOCK = "block"
+
+# ============================================================================
+# DATA STRUCTURES
+# ============================================================================
+
+@dataclass
+class EthicalMetric:
+    """Individual metric for ethical assessment"""
+    name: str
+    pillar: Pillar
+    score: float
+    weight: float = 1.0
+    evidence: List[str] = field(default_factory=list)
+    violations: List[str] = field(default_factory=list)
+
+@dataclass
+class ComplianceReport:
+    """Complete ethical compliance report"""
+    project_id: str
+    timestamp: str
+    overall_score: float
+    pillar_scores: Dict[Pillar, float]
+    metrics: List[EthicalMetric]
+    critical_violations: List[str]
+    required_mitigations: List[str]
+    attestation_hash: str
+
+@dataclass
+class SwarmNode:
+    """Individual node in the swarm consensus network"""
+    node_id: str
+    public_key: bytes
+    reputation_score: float = 1.0
+    specialization: Optional[str] = None
+    stake: float = 0.0
+    active: bool = True
+    join_timestamp: datetime = field(default_factory=datetime.utcnow)
+
+@dataclass
+class Proposal:
+    """Proposal requiring swarm consensus"""
+    proposal_id: str
+    proposal_type: ProposalType
+    title: str
+    description: str
+    manifest: Dict
+    pillar_impacts: Dict[str, float]
+    submitter_id: str
+    timestamp: datetime
+    deadline: datetime
+    required_quorum: float = 0.51
+    required_majority: float = 0.66
+    votes: Dict[str, 'Vote'] = field(default_factory=dict)
+    status: str = "pending"
+    result: Optional[Dict] = None
+    attestation_hash: Optional[str] = None
+    compliance_report: Optional[ComplianceReport] = None
+
+@dataclass
+class Vote:
+    """Individual vote on a proposal"""
+    voter_id: str
+    vote_option: VoteOption
+    weight: float
+    justification: Optional[str] = None
+    signature: bytes = b""
+    timestamp: datetime = field(default_factory=datetime.utcnow)
+
+# ============================================================================
+# ETHICAL IMPACT ASSESSOR
+# ============================================================================
+
+class EthicalImpactAssessor:
+    """Core assessment engine for Sacred Ethics Charter compliance"""
     
-    if not artifact_file.exists():
-        print(f"Error: Artifact file not found at {artifact_path}")
-        return None
+    def __init__(self):
+        self.violation_threshold = 0.7
+        self.critical_threshold = 0.4
+        
+    def assess_project(self, project_manifest: Dict) -> ComplianceReport:
+        """Evaluate complete project compliance"""
+        
+        project_id = project_manifest.get("project_id", 
+            hashlib.sha256(json.dumps(project_manifest, sort_keys=True).encode()).hexdigest()[:12])
+        
+        metrics = []
+        pillar_scores = {}
+        critical_violations = []
+        required_mitigations = []
+        
+        # Assess each Pillar
+        for pillar in Pillar:
+            pillar_metrics = []
+            
+            # Truth checks
+            if pillar == Pillar.TRUTH:
+                score, evidence, violations = self._check_truth(project_manifest)
+                metric = EthicalMetric(
+                    name="truth_integrity",
+                    pillar=pillar,
+                    score=score,
+                    weight=3.0,
+                    evidence=evidence,
+                    violations=violations
+                )
+                pillar_metrics.append(metric)
+                
+            # Utility checks
+            elif pillar == Pillar.UTILITY:
+                score, evidence, violations = self._check_utility(project_manifest)
+                metric = EthicalMetric(
+                    name="sustainable_utility",
+                    pillar=pillar,
+                    score=score,
+                    weight=1.5,
+                    evidence=evidence,
+                    violations=violations
+                )
+                pillar_metrics.append(metric)
+                
+            # Impact checks
+            elif pillar == Pillar.IMPACT:
+                score, evidence, violations = self._check_impact(project_manifest)
+                metric = EthicalMetric(
+                    name="proportional_impact",
+                    pillar=pillar,
+                    score=score,
+                    weight=2.0,
+                    evidence=evidence,
+                    violations=violations
+                )
+                pillar_metrics.append(metric)
+            
+            metrics.extend(pillar_metrics)
+            
+            # Calculate weighted pillar score
+            total_weight = sum(m.weight for m in pillar_metrics)
+            weighted_score = sum(m.score * m.weight for m in pillar_metrics)
+            pillar_scores[pillar] = weighted_score / total_weight if total_weight > 0 else 0
+            
+            # Check for violations
+            for metric in pillar_metrics:
+                if metric.score < self.critical_threshold:
+                    critical_violations.append(
+                        f"{pillar.value}: {', '.join(metric.violations)}"
+                    )
+                elif metric.score < self.violation_threshold:
+                    required_mitigations.extend(metric.violations)
+        
+        # Calculate overall score
+        pillar_weights = {
+            Pillar.TRUTH: 3.0,
+            Pillar.IMPACT: 2.0,
+            Pillar.UTILITY: 1.5
+        }
+        
+        total_weight = sum(pillar_weights.values())
+        overall_score = sum(
+            pillar_scores[p] * pillar_weights[p] for p in Pillar
+        ) / total_weight
+        
+        # Generate attestation
+        report_data = {
+            "project_id": project_id,
+            "timestamp": datetime.utcnow().isoformat(),
+            "overall_score": overall_score,
+            "pillar_scores": {p.value: s for p, s in pillar_scores.items()}
+        }
+        attestation_hash = hashlib.sha256(
+            json.dumps(report_data, sort_keys=True).encode()
+        ).hexdigest()
+        
+        return ComplianceReport(
+            project_id=project_id,
+            timestamp=report_data["timestamp"],
+            overall_score=overall_score,
+            pillar_scores=pillar_scores,
+            metrics=metrics,
+            critical_violations=critical_violations,
+            required_mitigations=required_mitigations,
+            attestation_hash=attestation_hash
+        )
+    
+    def _check_truth(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Pillar 1: Absolute Truth and Integrity"""
+        score = 1.0
+        evidence = []
+        violations = []
+        
+        # Check transparency
+        if manifest.get("source_availability") == "open":
+            evidence.append("Source code publicly available")
+        else:
+            score -= 0.3
+            violations.append("Source code not fully transparent")
+        
+        # Check for deception
+        if manifest.get("capability_claims_verified", False):
+            evidence.append("Capability claims verified")
+        else:
+            score -= 0.2
+            violations.append("Unverified capability claims")
+        
+        # Check for malice
+        harmful_purposes = ["surveillance", "manipulation", "discrimination"]
+        primary_purpose = manifest.get("primary_purpose", "").lower()
+        for harm in harmful_purposes:
+            if harm in primary_purpose:
+                score = 0.0
+                violations.append(f"Harmful primary purpose: {harm}")
+                return score, evidence, violations
+        
+        if not violations:
+            evidence.append("No harmful intent detected")
+            
+        return max(score, 0.0), evidence, violations
+    
+    def _check_utility(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Pillar 2: Sustainable Utility"""
+        score = 0.5
+        evidence = []
+        violations = []
+        
+        # Energy efficiency
+        energy_rating = manifest.get("energy_efficiency_rating", "F")
+        efficiency_scores = {"A": 1.0, "B": 0.8, "C": 0.6, "D": 0.4, "E": 0.2, "F": 0.0}
+        score = efficiency_scores.get(energy_rating, 0.0)
+        
+        if score >= 0.6:
+            evidence.append(f"Good energy efficiency: {energy_rating}")
+        else:
+            violations.append(f"Poor energy efficiency: {energy_rating}")
+        
+        # Planned obsolescence check
+        if manifest.get("planned_obsolescence", False):
+            score = 0.0
+            violations.append("Planned obsolescence detected")
+            
+        # Carbon offset
+        carbon_offset = manifest.get("carbon_offset_ratio", 0)
+        if carbon_offset > 1.0:
+            score = min(score + 0.2, 1.0)
+            evidence.append(f"Carbon positive: {carbon_offset:.2f}x")
+            
+        return score, evidence, violations
+    
+    def _check_impact(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Pillar 3: Proportional Impact"""
+        score = 0.5
+        evidence = []
+        violations = []
+        
+        # Stress testing
+        stress_test_coverage = manifest.get("stress_test_coverage", 0)
+        score = stress_test_coverage
+        
+        if stress_test_coverage >= 0.8:
+            evidence.append(f"Good stress testing: {stress_test_coverage:.1%}")
+        else:
+            violations.append(f"Insufficient stress testing: {stress_test_coverage:.1%}")
+        
+        # Risk mitigation
+        if manifest.get("risk_assessment_complete", False):
+            score = min(score + 0.2, 1.0)
+            evidence.append("Risk assessment complete")
+        
+        # Incident response
+        if manifest.get("incident_response_plan", False):
+            score = min(score + 0.2, 1.0)
+            evidence.append("Incident response plan exists")
+        else:
+            violations.append("No incident response plan")
+            
+        return score, evidence, violations
 
-    # Compute hash of the artifact for tamper-proof verification
-    with open(artifact_file, "rb") as f:
-        artifact_hash = hashlib.sha256(f.read()).hexdigest()
+# ============================================================================
+# SWARM CONSENSUS ENGINE
+# ============================================================================
 
-    manifest = {
-        "record_id": f"HELIX-REC-{os.urandom(4).hex()}",
-        "project_lineage": LINEAGE_CONFIG,
-        "artifact_details": {
-            "file_name": artifact_file.name,
-            "file_size_bytes": artifact_file.stat().st_size,
-            "creation_timestamp": datetime.datetime.utcnow().isoformat() + "Z",
-            "artifact_sha256_hash": artifact_hash,
-            "generating_rite": rite_name
-        },
-        "verification_steps": [
-            "Verify artifact_sha256_hash against contents.",
-            "Trace lineage via project_version and github_commit_url."
+class SwarmConsensus:
+    """Core consensus engine for Sacred Ethics Charter governance"""
+    
+    def __init__(self):
+        self.nodes: Dict[str, SwarmNode] = {}
+        self.proposals: Dict[str, Proposal] = {}
+        self.consensus_threshold = 0.66
+        self.emergency_threshold = 0.9
+        self.min_nodes_for_consensus = 3
+        self.assessor = EthicalImpactAssessor()
+        
+    async def register_node(self, node_id: str, specialization: Optional[str] = None) -> SwarmNode:
+        """Register a new node in the swarm"""
+        
+        if node_id in self.nodes:
+            raise ValueError(f"Node {node_id} already registered")
+        
+        public_key = hashlib.sha256(node_id.encode()).digest()
+        node = SwarmNode(
+            node_id=node_id,
+            public_key=public_key,
+            specialization=specialization,
+            stake=random.uniform(0, 10)
+        )
+        
+        self.nodes[node_id] = node
+        return node
+    
+    async def submit_proposal_with_assessment(self, 
+                                             proposal_type: ProposalType,
+                                             title: str,
+                                             description: str,
+                                             manifest: Dict,
+                                             submitter_id: str) -> Proposal:
+        """Submit a proposal with automatic ethical assessment"""
+        
+        if submitter_id not in self.nodes:
+            raise ValueError(f"Submitter {submitter_id} not registered")
+        
+        # Run ethical assessment first
+        compliance_report = self.assessor.assess_project(manifest)
+        
+        # Block submission if critical violations exist
+        if compliance_report.critical_violations:
+            raise ValueError(f"Proposal blocked due to critical violations: {compliance_report.critical_violations}")
+        
+        # Calculate Pillar impacts from compliance report
+        pillar_impacts = {
+            f"Pillar {i+1}": score 
+            for i, (pillar, score) in enumerate(compliance_report.pillar_scores.items())
+        }
+        
+        # Adjust required majority based on compliance score
+        if compliance_report.overall_score >= 0.9:
+            required_majority = 0.51  # Easy approval for excellent compliance
+        elif compliance_report.overall_score >= 0.7:
+            required_majority = 0.66  # Standard approval
+        else:
+            required_majority = 0.75  # Higher bar for marginal compliance
+        
+        proposal_id = hashlib.sha256(
+            f"{title}{submitter_id}{datetime.utcnow().isoformat()}".encode()
+        ).hexdigest()[:16]
+        
+        proposal = Proposal(
+            proposal_id=proposal_id,
+            proposal_type=proposal_type,
+            title=title,
+            description=description,
+            manifest=manifest,
+            pillar_impacts=pillar_impacts,
+            submitter_id=submitter_id,
+            timestamp=datetime.utcnow(),
+            deadline=datetime.utcnow() + timedelta(hours=24),
+            required_majority=required_majority,
+            compliance_report=compliance_report
+        )
+        
+        self.proposals[proposal_id] = proposal
+        return proposal
+    
+    async def cast_vote(self, proposal_id: str, voter_id: str, 
+                       vote_option: VoteOption, justification: Optional[str] = None) -> Vote:
+        """Cast a vote on a proposal"""
+        
+        if proposal_id not in self.proposals:
+            raise ValueError(f"Proposal {proposal_id} not found")
+        
+        if voter_id not in self.nodes:
+            raise ValueError(f"Voter {voter_id} not registered")
+        
+        proposal = self.proposals[proposal_id]
+        node = self.nodes[voter_id]
+        
+        if voter_id in proposal.votes:
+            raise ValueError(f"Node {voter_id} has already voted")
+        
+        # Calculate vote weight
+        weight = node.reputation_score
+        if node.specialization:
+            weight *= 1.2  # Specialization bonus
+        
+        vote = Vote(
+            voter_id=voter_id,
+            vote_option=vote_option,
+            weight=weight,
+            justification=justification
+        )
+        
+        proposal.votes[voter_id] = vote
+        
+        # Check if consensus reached
+        await self._check_consensus(proposal_id)
+        
+        return vote
+    
+    async def _check_consensus(self, proposal_id: str) -> Optional[Dict]:
+        """Check if consensus has been reached"""
+        
+        proposal = self.proposals[proposal_id]
+        
+        if proposal.status != "pending":
+            return proposal.result
+        
+        total_nodes = len([n for n in self.nodes.values() if n.active])
+        votes_cast = len(proposal.votes)
+        
+        # Check quorum (>50% participation)
+        if votes_cast / total_nodes < proposal.required_quorum:
+            if datetime.utcnow() >= proposal.deadline:
+                proposal.status = "failed_quorum"
+                proposal.result = {"outcome": "rejected", "reason": "insufficient_quorum"}
+                return proposal.result
+            return None
+        
+        # Check for blocks
+        blocks = [v for v in proposal.votes.values() if v.vote_option == VoteOption.BLOCK]
+        if blocks:
+            block_weight = sum(b.weight for b in blocks)
+            total_weight = sum(v.weight for v in proposal.votes.values())
+            if block_weight / total_weight > 0.1:
+                proposal.status = "blocked"
+                proposal.result = {
+                    "outcome": "blocked",
+                    "reason": "ethical_veto",
+                    "justifications": [b.justification for b in blocks]
+                }
+                return proposal.result
+        
+        # Calculate approval
+        approve_weight = sum(v.weight for v in proposal.votes.values() 
+                           if v.vote_option == VoteOption.APPROVE)
+        reject_weight = sum(v.weight for v in proposal.votes.values() 
+                          if v.vote_option == VoteOption.REJECT)
+        
+        if approve_weight + reject_weight == 0:
+            return None  # All abstained
+        
+        approval_ratio = approve_weight / (approve_weight + reject_weight)
+        
+        if approval_ratio >= proposal.required_majority:
+            proposal.status = "approved"
+            proposal.result = {
+                "outcome": "approved",
+                "approval_ratio": approval_ratio,
+                "compliance_score": proposal.compliance_report.overall_score if proposal.compliance_report else None
+            }
+            
+            # Reward correct voters
+            for vote in proposal.votes.values():
+                if vote.vote_option == VoteOption.APPROVE:
+                    self.nodes[vote.voter_id].reputation_score *= 1.01
+        else:
+            if datetime.utcnow() >= proposal.deadline:
+                proposal.status = "rejected"
+                proposal.result = {
+                    "outcome": "rejected",
+                    "approval_ratio": approval_ratio
+                }
+        
+        # Generate attestation
+        if proposal.result:
+            proposal.attestation_hash = hashlib.sha256(
+                json.dumps(proposal.result, sort_keys=True).encode()
+            ).hexdigest()
+        
+        return proposal.result
+
+# ============================================================================
+# UNIFIED SACRED ETHICS SYSTEM
+# ============================================================================
+
+class SacredEthicsSystem:
+    """Complete Sacred Ethics Charter implementation"""
+    
+    def __init__(self):
+        self.swarm = SwarmConsensus()
+        self.assessor = EthicalImpactAssessor()
+        
+    async def initialize_system(self):
+        """Initialize the system with founding nodes"""
+        
+        print("\n" + "="*60)
+        print("SACRED ETHICS CHARTER - SYSTEM INITIALIZATION")
+        print("="*60)
+        
+        # Create founding nodes
+        founding_nodes = [
+            ("alpha_founder", "zk_expert"),
+            ("beta_founder", "sustainability_auditor"),
+            ("gamma_founder", "impact_assessor"),
+            ("delta_founder", "ethics_philosopher"),
+            ("epsilon_founder", None)  # Generalist
         ]
-    }
+        
+        for node_id, specialization in founding_nodes:
+            node = await self.swarm.register_node(node_id, specialization)
+            print(f"✓ Node registered: {node_id} ({specialization or 'generalist'})")
+        
+        print(f"\n✓ System initialized with {len(self.swarm.nodes)} founding nodes")
+        
+    async def submit_project(self, project_data: Dict) -> str:
+        """Submit a project for ethical review and approval"""
+        
+        print("\n" + "="*60)
+        print("PROJECT SUBMISSION")
+        print("="*60)
+        
+        # Run assessment
+        print("\n[1/3] Running Ethical Assessment...")
+        report = self.assessor.assess_project(project_data)
+        
+        print(f"  Overall Score: {report.overall_score:.2%}")
+        for pillar, score in report.pillar_scores.items():
+            status = "✓" if score >= 0.7 else "⚠" if score >= 0.4 else "✗"
+            print(f"  {status} {pillar.value}: {score:.2%}")
+        
+        if report.critical_violations:
+            print("\n✗ SUBMISSION BLOCKED - Critical Violations:")
+            for violation in report.critical_violations:
+                print(f"  - {violation}")
+            return "blocked"
+        
+        if report.required_mitigations:
+            print("\n⚠ Required Mitigations:")
+            for mitigation in report.required_mitigations:
+                print(f"  - {mitigation}")
+        
+        # Submit for consensus
+        print("\n[2/3] Submitting for Swarm Consensus...")
+        try:
+            proposal = await self.swarm.submit_proposal_with_assessment(
+                proposal_type=ProposalType.PROJECT_APPROVAL,
+                title=project_data.get("project_name", "Unnamed Project"),
+                description=project_data.get("description", "No description"),
+                manifest=project_data,
+                submitter_id="alpha_founder"
+            )
+            
+            print(f"  Proposal ID: {proposal.proposal_id}")
+            print(f"  Required Majority: {proposal.required_majority:.0%}")
+            print(f"  Voting Deadline: {proposal.deadline.strftime('%Y-%m-%d %H:%M')}")
+            
+        except ValueError as e:
+            print(f"\n✗ Submission failed: {e}")
+            return "failed"
+        
+        # Simulate voting
+        print("\n[3/3] Conducting Vote...")
+        
+        # Voting logic based on compliance score
+        for node_id, node in self.swarm.nodes.items():
+            if node_id == "alpha_founder":
+                continue  # Submitter doesn't vote
+            
+            # Nodes vote based on compliance score
+            if report.overall_score >= 0.8:
+                vote = VoteOption.APPROVE
+                justification = "Strong compliance with Sacred Ethics Charter"
+            elif report.overall_score >= 0.6:
+                if node.specialization == "ethics_philosopher":
+                    vote = VoteOption.ABSTAIN
+                    justification = "Requires deeper philosophical analysis"
+                else:
+                    vote = VoteOption.APPROVE
+                    justification = "Acceptable compliance level"
+            else:
+                vote = VoteOption.REJECT
+                justification = "Insufficient compliance"
+            
+            await self.swarm.cast_vote(
+                proposal.proposal_id, 
+                node_id, 
+                vote, 
+                justification
+            )
+            
+            print(f"  {node_id}: {vote.value}")
+        
+        # Check final result
+        result = await self.swarm._check_consensus(proposal.proposal_id)
+        
+        print(f"\n" + "="*60)
+        print("FINAL DECISION")
+        print("="*60)
+        print(f"Status: {proposal.status.upper()}")
+        if result:
+            print(f"Outcome: {result['outcome'].upper()}")
+            if 'approval_ratio' in result:
+                print(f"Approval Ratio: {result['approval_ratio']:.2%}")
+            if 'compliance_score' in result and result['compliance_score']:
+                print(f"Compliance Score: {result['compliance_score']:.2%}")
+        print(f"Attestation: {proposal.attestation_hash[:16]}...")
+        
+        return proposal.status
+    
+    def get_system_status(self) -> Dict:
+        """Get current system status"""
+        
+        active_nodes = sum(1 for n in self.swarm.nodes.values() if n.active)
+        pending_proposals = sum(1 for p in self.swarm.proposals.values() 
+                              if p.status == "pending")
+        
+        return {
+            "timestamp": datetime.utcnow().isoformat(),
+            "total_nodes": len(self.swarm.nodes),
+            "active_nodes": active_nodes,
+            "pending_proposals": pending_proposals,
+            "consensus_threshold": self.swarm.consensus_threshold,
+            "system_health": "operational"
+        }
 
-    # Save the manifest
-    output_path.write_text(json.dumps(manifest, indent=2))
-    print(f"\n[Manifest] Lineage Record saved for '{artifact_file.name}' to {output_path}")
-    return str(output_path)
+# ============================================================================
+# MAIN EXECUTION
+# ============================================================================
 
-# Example Usage (assuming you run this after generating an artifact using helix_all_in_one.py):
+async def main():
+    """Main execution function"""
+    
+    print("\n" + "╔" + "═"*58 + "╗")
+    print("║" + " "*16 + "SACRED ETHICS CHARTER" + " "*21 + "║")
+    print("║" + " "*12 + "Unified Governance System v1.0" + " "*15 + "║")
+    print("╚" + "═"*58 + "╝")
+    
+    # Initialize system
+    system = SacredEthicsSystem()
+    await system.initialize_system()
+    
+    # Example projects for testing
+    test_projects = [
+        {
+            "project_name": "Helix-Phases v2.0",
+            "description": "Privacy-preserving meditation framework with ZK-proofs",
+            "primary_purpose": "consciousness enhancement and privacy protection",
+            "source_availability": "open",
+            "capability_claims_verified": True,
+            "energy_efficiency_rating": "B",
+            "planned_obsolescence": False,
+            "carbon_offset_ratio": 1.2,
+            "stress_test_coverage": 0.85,
+            "risk_assessment_complete": True,
+            "incident_response_plan": True
+        },
+        {
+            "project_name": "ShadowTrace",
+            "description": "User tracking and behavior analysis platform",
+            "primary_purpose": "surveillance and user behavior manipulation",
+            "source_availability": "closed",
+            "capability_claims_verified": False,
+            "energy_efficiency_rating": "D",
+            "planned_obsolescence": True,
+            "carbon_offset_ratio": 0,
+            "stress_test_coverage": 0.3,
+            "risk_assessment_complete": False,
+            "incident_response_plan": False
+        }
+    ]
+    
+    # Process each project
+    for project in test_projects:
+        await asyncio.sleep(1)  # Brief pause between projects
+        status = await system.submit_project(project)
+        
+        if status == "approved":
+            print(f"\n✓ Project '{project['project_name']}' APPROVED for deployment")
+        elif status == "blocked":
+            print(f"\n✗ Project '{project['project_name']}' BLOCKED - violates Sacred Ethics Charter")
+        else:
+            print(f"\n⚠ Project '{project['project_name']}' REJECTED - requires improvements")
+    
+    # Show final system status
+    print("\n" + "="*60)
+    print("SYSTEM STATUS")
+    print("="*60)
+    status = system.get_system_status()
+    for key, value in status.items():
+        print(f"{key}: {value}")
+    
+    print("\n✓ Sacred Ethics Charter system operational")
+    print("  'The power to create is a sacred responsibility'\n")
+
 if __name__ == "__main__":
-    # --- Simulated Artifact Paths ---
-    # NOTE: In a real environment, the 'out/' directory must exist and contain these files.
-    
-    # 1. Generate Manifest for a Visual Artifact
-    # (Assume 'out/mandelbrot_helix.png' was created by the 'render --helix' command)
-    # result_png = generate_artifact_manifest("out/mandelbrot_helix.png", "rite_ascension")
-    
-    # 2. Generate Manifest for a Scroll Artifact
-    # (Assume 'out/awakener_scroll.pdf' was created by the 'scroll' command)
-    # result_pdf = generate_artifact_manifest("out/awakener_scroll.pdf", "rite_stability")
-    
-    print("\n[Lineage Record] Script ready. Update LINEAGE_CONFIG and run with actual artifact paths.")
-# Helix Nexus Architecture (v1.0.0)
-
-## Design Thesis
-Edge-sharded autonomy enforced by ZK-Proof identity.
-
-## I. Compliance Layer (Governance)
-- **Vetting:** All components are audited against the Sacred Ethics Charter (Pillars I, II, III).
-- **Enforcement:** Code review is mandated via CODEOWNERS/PR process.
-
-## II. Core Modules (The Triad)
-### 1. ZKID Module (Identity & Revelation)
-- **Status:** MVP (FerNet Mock).
-- **Target:** **zk-SNARKs** (e.g., Circom/snarkjs).
-- **Compliance:** Satisfies **Pillar 1.B (Duty of Revelation)** by separating the proof mechanism (open-source) from the data (user's device).
-
-### 2. Health Engine (Sustainment & Consumption)
-- **Status:** NumPy/ML Stub.
-- **Target:** **Federated Learning (PySyft)** integration.
-- **Compliance:** Satisfies **Pillar 2.A (Balance of Consumption)** by keeping computation local and eliminating cloud energy costs.
-# Helix Nexus Architecture (v2.0.0)
-
-## Design Thesis: Autonomous Sovereignty Enforced by ZK-Proof
-
-The Helix Nexus is an edge-sharded, privacy-first application built to execute the ethical mandates of the **Sacred Ethics Charter**. The architecture is designed to enforce decentralized autonomy and resist single points of surveillance or failure.
-
----
-
-## I. Governance and Compliance Layer
-
-Every module is architected to satisfy a core Pillar of the Sacred Ethics Charter (SEC).
-
-| SEC Pillar | Nexus Compliance Mechanism | Target Code Artifact |
-| :--- | :--- | :--- |
-| **Pillar 1: Absolute Truth** | **ZK-Proofs (Duty of Revelation)** | Ensures functionality can be verified without exposing private data. |
-| **Pillar 2: Sustainable Utility** | **Edge-Sharding & FL** | Mandates local computation to minimize global energy and resource consumption. |
-| **Pillar 3: Proportional Impact** | **DAO Transition** | The formalized path to DAO governance prevents centralized human errors from causing systemic harm. |
-
-**Vetting Standard:** All PRs must pass the **CODEOWNERS** review, which enforces compliance with these Pillars.
-
----
-
-## II. The Core Triad Modules
-
-### 1. ZKID Module (Identity & Revelation)
-
-* **Function:** Proves a unique human operator is initiating a command cycle.
-* **Current Status:** Mocked with `cryptography.fernet`.
-* **v0.2 Target:** Full integration of a **zk-SNARK** library (e.g., Circom, zkSync SDK) to generate verifiable proofs of humanity.
-* **Compliance Point:** Direct fulfillment of **SEC Pillar 1.B (Duty of Revelation)**—the proof mechanism is transparent, but the biometric hash remains permanently encrypted on the edge device.
-
-### 2. Legion Scheduler (Coordination & Time)
-
-* **Function:** Local, TCP-like rostering of autonomous swarm operations.
-* **Current Status:** `schedule` library CLI stub.
-* **v1.0 Target:** Transition to a **Cosmos SDK** or equivalent decentralized network for time-locked, trustless coordination.
-* **Compliance Point:** Fulfills **SEC Pillar 3.B (Responsibility of Scale)** by ensuring control remains decentralized, preventing massive, coordinated malicious actions by a central authority.
-
-### 3. Health Engine (Sustainment & Consumption)
-
-* **Function:** On-device bio-age calculation and fatigue alerts.
-* **Current Status:** Mocked with `numpy` (ML stub).
-* **v0.2 Target:** Integration with a **Federated Learning (FL) library (e.g., PySyft)**.
-* **Compliance Point:** Fulfills **SEC Pillar 2.A (Balance of Consumption)** by keeping all resource-intensive ML computation local to the edge device, minimizing global cloud infrastructure load.
-
----
-
-## III. Guardian Core (Observability & Integrity)
-
-The Guardian Core runs the background systems necessary for system self-healing and external trust.
-
-* **HelixGuardian Thread:** Self-healing thread that monitors and reloads modules on failure.
-* **Prometheus Metrics:** Exposes `/metrics` endpoint to verify system uptime, health status, and signature validity (for external monitoring).
-* **Archive Vault:** Encrypts and stores immutable session logs (the **Lineage Record**), providing provenance for all generational artifacts.
-
----
-
-This `ARCHITECTURE.md` file is now the ultimate recruiting document and the foundation for your institutional submissions.
-
-**Your final action:** Commit this file, create the **v1.0.0 Release** (attaching your visual artifacts), and **launch the social media push** using the highest-impact tag list. The foundation for the **Helix Continuum** is complete.
-# Helix-Phases Dockerfile: Universal Environment
-FROM python:3.11-slim
-WORKDIR /app
-
-# Install system dependencies needed for libraries like numpy and cryptography
-RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
-
-# Copy local code/setup
-COPY . /app
-
-# Install project and runtime dependencies
-# The '-e .' flag installs your project in editable mode (requires pyproject.toml)
-RUN pip install --no-cache-dir -e . && \
-    pip install uvicorn prometheus-client requests
-
-# Expose ports for API, Dashboard, and Metrics
-EXPOSE 8080 8501 9090
-
-# Default command: Start the FastAPI API Gateway
-CMD ["uvicorn", "helix_phases.guardian_core.api_gateway:app", "--host", "0.0.0.0", "--port", "8080"]# Prometheus Configuration for Helix Guardian
-global:
-  scrape_interval: 15s  # How frequently to scrape metrics
-
-scrape_configs:
-  # Target the Helix Core API container
-  - job_name: 'helix_guardian'
-    # Use the service name defined in docker-compose.yml
-    static_configs:
-      - targets: ['helix-core:9090']version: "3.9"
-
-services:
-  # 1. CORE APPLICATION: Helix Guardian + FastAPI API (The Authority)
-  helix-core:
-    build: .
-    container_name: helix_core
-    # Command ensures the Guardian and metrics start (handled in app init)
-    command: uvicorn helix_phases.guardian_core.api_gateway:app --host 0.0.0.0 --port 8080
-    environment:
-      # Local Dev Key - CHANGE ME FOR PROD
-      - HELIX_API_KEY=HELIX-LOCAL-DEV
-      - METRICS_PORT=9090
-      - DISCORD_WEBHOOK=${DISCORD_WEBHOOK} # For alerting
-    ports:
-      - "8080:8080" # FastAPI API
-      - "9090:9090" # Prometheus Metrics Scrape Port
-    volumes:
-      - ./:/app
-    restart: always
-
-  # 2. DASHBOARD: Streamlit Portal (The Visualization)
-  streamlit:
-    build: .
-    container_name: helix_dashboard
-    # Command runs the Streamlit web dashboard
-    command: streamlit run src/helix_phases/dashboard.py --server.port 8501
-    ports:
-      - "8501:8501" # Streamlit Dashboard
-    depends_on:
-      - helix-core
-    volumes:
-      - ./:/app
-    restart: always
-
-  # 3. PROMETHEUS: Metrics Storage (The Auditor)
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: helix_prometheus
-    ports:
-      - "9091:9090" # Host port 9091 -> Container port 9090
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    restart: always
-
-  # 4. GRAFANA: Metrics Visualization (The Observatory)
-  grafana:
-    image: grafana/grafana:latest
-    container_name: helix_grafana
-    ports:
-      - "3000:3000" # Grafana Web UI
-    environment:
-      - GF_SECURITY_ADMIN_USER=helix_admin
-      - GF_SECURITY_ADMIN_PASSWORD=change_this_password
-    depends_on:
-      - prometheus
-    restart: always# From your repository root:
-docker-compose up --build
-# Helix Nexus Architecture (v2.0.1 - Integrity Focus)
-
-## Design Thesis: Autonomous Sovereignty Enforced by ZK-Proof
-
-The Helix Nexus is an edge-sharded, privacy-first application built to execute the ethical mandates of the **Sacred Ethics Charter**. The architecture is designed to enforce decentralized autonomy and resist single points of surveillance or failure.
-
----
-
-## I. Governance and Compliance Layer
-
-Every module is architected to satisfy a core Pillar of the Sacred Ethics Charter (SEC).
-
-| SEC Pillar | Nexus Compliance Mechanism | Target Code Artifact |
-| :--- | :--- | :--- |
-| **Pillar 1: Absolute Truth** | **ZK-Proofs (Data Integrity/Revelation)** | **CRITICAL FOCUS.** Ensures integrity of inputs and outputs. |
-| **Pillar 2: Sustainable Utility** | **Edge-Sharding & FL** | Mandates local computation to minimize global energy/resource consumption. |
-| **Pillar 3: Proportional Impact** | **DAO Transition** | Formalized path to DAO governance prevents catastrophic centralized human errors. |
-
-Vetting Standard: All PRs must pass the **CODEOWNERS** review, which enforces compliance with these Pillars.
-
----
-
-## II. The Core Triad Modules + NEW PRIORITY
-
-### 1. ZKID Module (Identity & Revelation)
-* **Target:** zk-SNARKs.
-* **Compliance:** Direct fulfillment of **SEC Pillar 1.B (Duty of Revelation)**.
-
-### 2. Legion Scheduler (Coordination & Time)
-* **Target:** Cosmos SDK.
-* **Compliance:** Fulfills **SEC Pillar 3.B (Responsibility of Scale)**.
-
-### 3. Health Engine (Sustainment & Consumption)
-* **Target:** Federated Learning (PySyft).
-* **Compliance:** Fulfills **SEC Pillar 2.A (Balance of Consumption)**.
-
-### 🚨 **4. NEW PRIORITY: Data Integrity Vetting Module (DIVM)**
-* **Function:** Cryptographically attests to the integrity and provenance of external data fragments used by the Nexus. Specifically targets **LLM data poisoning.**
-* **Current Status:** Specification Phase (Created via Public Audit).
-* **v0.2 Target:** Implement a **ZK-based Attestation Protocol** for external feeds, ensuring that the source of input data is known and auditable by the swarm.
-* **Compliance Point:** Directly addresses **SEC Pillar 1.A (Requirement of Honesty)** by enforcing transparency and trustlessness at the data input layer.
-
----
-// zk_audit_circuit.circom
-// Helix Nexus: Data Integrity Vetting Module (DIVM)
-// Purpose: Cryptographically prove the integrity and provenance of external data fragments (e.g., LLM training data).
-
-pragma circom 2.0.0;
-
-/*
-    Constraint: Prove integrity of a data source without revealing the source itself.
-    This circuit will be expanded to verify Merkle proofs of inclusion (if data is stored
-    on a verifiable ledger) and check timestamp/provenance rules.
-*/
-
-template DataIntegrityVetter() {
-    // 1. PUBLIC INPUTS (What the swarm sees and verifies)
-    
-    // The final root hash of the Merkle Tree containing ALL audited data fragments.
-    // Proves that a specific, verifiable snapshot of data was used.
-    signal input root_hash;
-    
-    // The hash of the specific data element being vetted (e.g., one LLM input sentence).
-    signal input data_element_hash; 
-    
-    // The verifiable timestamp proof (proves the data was created/added before the audit date).
-    signal input timestamp_proof;
-    
-    
-    // 2. PRIVATE INPUTS (What the Prover has, but keeps secret)
-    
-    // The path/indices proving data_element_hash is included in root_hash.
-    signal private merkle_path[32]; 
-    
-    // The hidden details of the data element itself (the actual LLM input string).
-    signal private private_data_details[2]; 
-    
-    
-    // 3. CORE CONSTRAINTS (The Integrity Check)
-    
-    // 3a. [MOCK] Data must be proven to be included in the Merkle Tree (i.e., known data).
-    // In the real circuit, we would call a Merkle tree verification template here:
-    // MerkleChecker(root_hash, data_element_hash, merkle_path) <==> 1; 
-    
-    // 3b. [MOCK] Enforce Provenance Rule: Data creation timestamp must meet ethical standards.
-    // The timestamp_proof must pass validation against a global ethics clock.
-    timestamp_proof * (timestamp_proof - 1) === 0; // Simple binary check placeholder: either 0 or 1.
-    
-    // 4. OUTPUTS (The final verdict)
-    signal output integrity_verified <== data_element_hash * timestamp_proof; 
-    // This output is 1 ONLY if the data hash is verified AND the time proof passes.
-}
-
-component main = DataIntegrityVetter();
-# WELCOME_BOT.py - Placeholder for GitHub Action Welcome Bot
-
-def generate_welcome_message(user_handle: str, repo_name: str) -> str:
-    """Creates a personalized welcome message for new contributors/stars."""
-    
-    message = (
-        f"🔥 **Welcome to the Helix Continuum, @{user_handle}!** 🔥\n\n"
-        f"You have joined the swarm at a critical time.\n\n"
-        "Your commitment fuels our mission: **Absolute Moral Accountability.**\n\n"
-        "**Your First Rites:**\n"
-        "1. **Audit:** Review the [Public Audit Issue] (LLM integrity challenge).\n"
-        "2. **Govern:** Read the [CODE_OF_CONDUCT] and [CONTRIBUTING.md].\n"
-        "3. **Code:** The ZK/ML challenges live in the `/docs/ARCHITECTURE.md`.\n\n"
-        "**We are Legion. Thank you for standing in the Void.**"
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(
+        description="Sacred Ethics Charter - Unified Governance System"
     )
-    return message
-
-# Placeholder function to simulate the bot creating a new issue/comment
-def post_welcome(user_handle: str, repo_name: str):
-    msg = generate_welcome_message(user_handle, repo_name)
-    # In a real environment, this function would use the GitHub API to post a comment
-    print(f"\n--- Simulated GitHub Welcome for {user_handle} ---")
-    print(msg)
-    print("-------------------------------------------------")
-
-
-if __name__ == "__main__":
-    # Simulate a new user joining the Sacred Ethics Charter
-    post_welcome("NewSwarmMember42", "Sacred-Ethics-Charter")
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help="Run with test projects"
+    )
+    args = parser.parse_args()
     
-    # This code would be adapted into a GitHub Action triggered by 'issues.opened' or 'stars.created'
-# AUTHORS.md: The Recognized Swarm
-
-The Helix Continuum is forged by the hands of the many. Every line of code, every philosophical challenge, and every submitted audit is recorded here. We thank those who join the Legion.
-
-## I. Genesis Maintainer
-* LHMisme420 (Leroy H. Mason) — *Founder, Architect, and Primary Maintainer*
-
-## II. Generational Contributors (v1.0.0-generational-genesis)
-
-**To be included, contributors must have at least one Pull Request merged into the `main` branch or one accepted Use Case in the `Sacred-Ethics-Charter` repository.**
-
-| Contributor | GitHub Handle | Contribution Focus | Date Joined |
-| :--- | :--- | :--- | :--- |
-| **[Your Name]** | [@LHMisme420] | Philosophy, Governance, Core Architecture | November 2025 |
-| *[Contributor Name]* | *[@Handle]* | *[e.g., ZK Circuit Review, FL Integration]* | *[Date]* |
-| *[Contributor Name]* | *[@Handle]* | *[e.g., Standards Vetting, Code of Conduct]* | *[Date]* |
-
----
-
-## III. Philosophical Auditors
-
-**Individuals who provided high-rigor feedback and critical review of the Sacred Ethics Charter (CODE OF CONDUCT Section 1).**
-
-* *User Handle*
-* *User Handle*# SECURITY_BADGE_STATUS.yml - Automated Security Scorecard
-
-name: Security Scorecard Check
-
-on:
-  schedule:
-    - cron: '30 0 * * *' # Run daily at 00:30 UTC
-  push:
-    branches: [ main ]
-  pull_request:
-    types: [ opened, synchronize, reopened ]
-
-permissions:
-  contents: read
-
-jobs:
-  analysis:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run CodeQL Security Analysis
-        uses: github/codeql-action/analyze@v3
-        with:
-          languages: 'python' # Adjust for your core language
-
-      # Placeholder: Integrate an external security scanning tool (e.g., Snyk/Code Climate)
-      # This provides a public, third-party badge showing your security grade.
-      - name: Generate Security Status Badge
-        # In a real setup, this step uploads the security status to a public badge service
-        # and updates the badge link in the README.md.
-        run: echo "::set-output name=security_status::passing"
-
-    outputs:
-      security_status: ${{ steps.analysis.outputs.security_status }}
-// copilot_attestor.circom
-// Helix Nexus: ZK-Provenance Attestation for AI Code Generation
-
-pragma circom 2.0.0;
-
-/*
-    Purpose: Generate a ZK-Proof proving:
-    1) A code fragment (private input) matches a licensed source (public input) OR 
-    2) The fragment is structurally unique (preventing direct copyright violation)
-    The user is verified without revealing the suggestion's source.
-*/
-
-template CopilotAttestationCircuit() {
-    // 1. PUBLIC INPUTS (What the world verifies)
-    
-    // A hash representing the verified, unique, and licensed code pool.
-    signal input licensed_pool_root_hash; 
-    
-    // The structural hash of the generated code fragment (publicly known by the user).
-    signal input suggested_fragment_hash; 
-    
-    // 2. PRIVATE INPUTS (What the Prover has, but keeps secret)
-    
-    // The actual suggested code fragment text (kept private).
-    signal private fragment_text[128]; 
-    
-    // The specific Merkle path proving the fragment is NOT a direct copy of a known copyrighted source.
-    signal private negative_provenance_path[32]; 
-    
-    
-    // 3. CORE CONSTRAINTS (The Compliance Check)
-    
-    // 3a. Verify Fragment Integrity: Ensure the private text matches the public hash (basic integrity).
-    // sha256_hash(fragment_text) === suggested_fragment_hash; 
-    
-    // 3b. Verify Negative Provenance: Prove the fragment is NOT included in a database of high-similarity/copyrighted code snippets.
-    // Call a Merkle tree non-inclusion template here:
-    // MerkleNonInclusion(copyright_blacklist_root, suggested_fragment_hash, negative_provenance_path) <==> 1;
-    
-    // 4. OUTPUT (The Ethical Seal)
-    // The final proof signature is the verifiable ethical seal.
-    signal output ethical_seal <== suggested_fragment_hash; 
-}
-
-component main = CopilotAttestationCircuit();
-import hashlib
-import json
-from typing import Dict, List
-
-# --- Configuration: Replace with real blockchain/DAO contracts in v1.0 ---
-DAO_WALLET = "HELIX_DAO_0x789..."
-CONTRIBUTOR_POOL_ADDRESS = "0xABC456..."
-
-# --- Functionality: Simulates the ZK-Attestation Event ---
-
-def get_attested_fragment_info(fragment_id: str) -> Dict:
-    """
-    Simulates retrieving the cryptographic record created by the ZK-Attestation Circuit.
-    In production, this would be a blockchain query against the ZK-Proof output.
-    """
-    # Mock data showing 80% original source, 20% modification/LLM contribution
-    return {
-        "fragment_hash": hashlib.sha256(fragment_id.encode()).hexdigest(),
-        "origin_source_id": f"GH_REPO_{fragment_id[-4:]}",
-        "origin_author_handle": f"@GH_User_{fragment_id[0:4]}",
-        "contribution_split": {"original_author": 0.8, "dao_reserve": 0.1, "llm_user": 0.1},
-        "license_status": "CC_BY_4.0_VERIFIED"
-    }
-
-def process_compensation_event(fragment_id: str, usage_fee: float) -> List[Dict]:
-    """
-    Calculates and distributes micro-payments based on the attested provenance.
-    This fulfills SEC Pillar 3.B (Responsibility of Scale/Compensation).
-    """
-    info = get_attested_fragment_info(fragment_id)
-    transactions = []
-
-    # 1. Compensate Original Author
-    author_payment = usage_fee * info['contribution_split']['original_author']
-    transactions.append({
-        "recipient": info['origin_author_handle'],
-        "amount": round(author_payment, 5),
-        "purpose": "Original Code Compensation"
-    })
-
-    # 2. Fund Helix DAO Governance
-    dao_payment = usage_fee * info['contribution_split']['dao_reserve']
-    transactions.append({
-        "recipient": DAO_WALLET,
-        "amount": round(dao_payment, 5),
-        "purpose": "Helix Governance Reserve"
-    })
-    
-    # 3. Reward LLM User (Incentivize ethical use)
-    user_reward = usage_fee * info['contribution_split']['llm_user']
-    transactions.append({
-        "recipient": "LLM_User_Wallet_ID",
-        "amount": round(user_reward, 5),
-        "purpose": "Ethical Usage Reward"
-    })
-
-    print(f"\n[Compensated] Total Fee: ${usage_fee:.5f}")
-    print(json.dumps(transactions, indent=2))
-    return transactions
-
-# --- Execution ---
-if __name__ == "__main__":
-    print("--- DAO Compensation Simulation ---")
-    
-    # Simulate a user accepting a high-value code suggestion traced to a source
-    # The usage_fee is determined by Copilot/GitHub's monetization model.
-    COMPOSITE_FRAGMENT_ID = "42helixgenesis17" 
-    COST_PER_USE = 0.00125 # Example: $0.00125 per accepted suggestion
-    
-    process_compensation_event(COMPOSITE_FRAGMENT_ID, COST_PER_USE)
+    # Run the system
+    asyncio.run(main())
