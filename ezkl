@@ -1,0 +1,34 @@
+import ezkl
+import os
+import torch
+
+def generate_zk_proof(model_path="ethics_model.onnx"):
+    print("🛡️ Generating ZK-SNARK for Ethical Compliance...")
+    
+    # 1. Define filenames
+    model_path = os.path.join('network.onnx')
+    compiled_model_path = os.path.join('network.ezkl')
+    pk_path = os.path.join('test.pk')
+    vk_path = os.path.join('test.vk')
+    settings_path = os.path.join('settings.json')
+    witness_path = os.path.join('witness.json')
+    proof_path = os.path.join('proof.json')
+
+    # 2. Generate Settings & Compile
+    # (In production, do this once and save the files)
+    run_args = ezkl.PyRunArgs()
+    run_args.input_visibility = "private" # Privacy is key here
+    run_args.param_visibility = "fixed"
+    run_args.output_visibility = "public"
+    
+    # 3. Prove
+    # This creates the proof.json that you submit to the DAO
+    res = ezkl.prove(
+        witness=witness_path,
+        model=compiled_model_path,
+        pk_path=pk_path,
+        proof_path=proof_path,
+        srs_path=None,
+    )
+    print("✅ Proof Generated successfully!")
+    return proof_path
