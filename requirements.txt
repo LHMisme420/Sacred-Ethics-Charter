@@ -1,0 +1,5 @@
+pyyaml
+cirq  # For real ZK-SNARKs
+flwr  # Federated learning
+web3  # DAO integration
+sqlite3  # Built-in
