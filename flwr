@@ -1,0 +1,39 @@
+import flwr as fl
+import torch
+import torch.nn as nn
+from collections import OrderedDict
+
+# Define your simple "Ethics Model" (Neural Network)
+class EthicsNet(nn.Module):
+    def __init__(self):
+        super(EthicsNet, self).__init__()
+        self.fc1 = nn.Linear(4, 10) # Example inputs: Compliance, Safety, Bias, Utility
+        self.fc2 = nn.Linear(10, 1) # Output: Ethical Score (0-1)
+
+    def forward(self, x):
+        return torch.sigmoid(self.fc2(torch.relu(self.fc1(x))))
+
+# Define the Flower Client
+class EthicsClient(fl.client.NumPyClient):
+    def __init__(self):
+        self.model = EthicsNet()
+    
+    def get_parameters(self, config):
+        return [val.cpu().numpy() for _, val in self.model.state_dict().items()]
+
+    def fit(self, parameters, config):
+        # 1. Update local model with global weights
+        params_dict = zip(self.model.state_dict().keys(), parameters)
+        state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+        self.model.load_state_dict(state_dict, strict=True)
+        
+        # 2. Train on LOCAL data (Mock data here, replace with real local DB)
+        # In real life: loop over your local private dataset
+        print("Training on local private data...")
+        
+        # 3. Return updated weights
+        return self.get_parameters(config={}), 10, {} # 10 = number of examples
+
+# Start the client
+if __name__ == "__main__":
+    fl.client.start_numpy_client(server_address="127.0.0.1:8080", client=EthicsClient())
