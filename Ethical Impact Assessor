@@ -1,0 +1,608 @@
+#!/usr/bin/env python3
+"""
+Ethical Impact Assessor for Sacred Ethics Charter
+Automated compliance evaluation against the Three Pillars
+Author: LHMisme420 / Helix Nexus Collective
+"""
+
+import hashlib
+import json
+from datetime import datetime
+from typing import Dict, List, Optional, Tuple
+from dataclasses import dataclass, field
+from enum import Enum
+import numpy as np
+
+class Pillar(Enum):
+    """The Three Sacred Pillars"""
+    TRUTH = "Absolute Truth and Integrity"
+    UTILITY = "Sustainable Utility" 
+    IMPACT = "Proportional Impact"
+
+class ViolationSeverity(Enum):
+    """Severity levels for ethical violations"""
+    MINOR = 1      # Can be mitigated
+    MAJOR = 2      # Requires redesign
+    CRITICAL = 3   # Project must halt
+    
+@dataclass
+class EthicalMetric:
+    """Individual metric for ethical assessment"""
+    name: str
+    pillar: Pillar
+    score: float  # 0.0 to 1.0
+    weight: float = 1.0
+    evidence: List[str] = field(default_factory=list)
+    violations: List[str] = field(default_factory=list)
+    
+@dataclass
+class ComplianceReport:
+    """Complete ethical compliance report"""
+    project_id: str
+    timestamp: str
+    overall_score: float
+    pillar_scores: Dict[Pillar, float]
+    metrics: List[EthicalMetric]
+    critical_violations: List[str]
+    required_mitigations: List[str]
+    attestation_hash: str
+    
+class EthicalImpactAssessor:
+    """
+    Core assessment engine for Sacred Ethics Charter compliance
+    Implements automated vetting against all Three Pillars
+    """
+    
+    def __init__(self):
+        self.metrics_registry = self._initialize_metrics()
+        self.violation_threshold = 0.7  # Below this requires intervention
+        self.critical_threshold = 0.4   # Below this halts project
+        
+    def _initialize_metrics(self) -> Dict[Pillar, List[Dict]]:
+        """Initialize the assessment metrics for each Pillar"""
+        return {
+            Pillar.TRUTH: [
+                {
+                    "name": "transparency_quotient",
+                    "check": self._check_transparency,
+                    "weight": 1.5,
+                    "description": "Duty of Revelation - auditable mechanisms"
+                },
+                {
+                    "name": "honesty_verification", 
+                    "check": self._check_honesty,
+                    "weight": 2.0,
+                    "description": "Requirement of Honesty - no deception"
+                },
+                {
+                    "name": "harm_intent_scan",
+                    "check": self._check_harm_intent,
+                    "weight": 3.0,  # Highest weight - absolute prohibition
+                    "description": "Prohibition of Malice - no systemic harm"
+                }
+            ],
+            Pillar.UTILITY: [
+                {
+                    "name": "resource_efficiency",
+                    "check": self._check_resource_balance,
+                    "weight": 1.5,
+                    "description": "Balance of Consumption - proportional resources"
+                },
+                {
+                    "name": "longevity_score",
+                    "check": self._check_longevity,
+                    "weight": 1.0,
+                    "description": "Commitment to Persistence - repairability"
+                },
+                {
+                    "name": "regeneration_factor",
+                    "check": self._check_regeneration,
+                    "weight": 1.2,
+                    "description": "Mandate of Regeneration - positive contribution"
+                }
+            ],
+            Pillar.IMPACT: [
+                {
+                    "name": "risk_mitigation_depth",
+                    "check": self._check_risk_mitigation,
+                    "weight": 2.0,
+                    "description": "Preemptive Mitigation - stress testing"
+                },
+                {
+                    "name": "scale_vigilance",
+                    "check": self._check_scale_responsibility,
+                    "weight": 1.8,
+                    "description": "Responsibility of Scale - proportional vigilance"
+                },
+                {
+                    "name": "remediation_readiness",
+                    "check": self._check_remediation,
+                    "weight": 1.5,
+                    "description": "Mandate of Repair - response capability"
+                }
+            ]
+        }
+    
+    def assess_project(self, project_manifest: Dict) -> ComplianceReport:
+        """
+        Primary assessment function - evaluates complete project compliance
+        
+        Args:
+            project_manifest: Project details including code, resources, impact projections
+            
+        Returns:
+            ComplianceReport with scoring and required actions
+        """
+        project_id = project_manifest.get("project_id", hashlib.sha256(
+            json.dumps(project_manifest, sort_keys=True).encode()
+        ).hexdigest()[:12])
+        
+        metrics = []
+        pillar_scores = {}
+        critical_violations = []
+        required_mitigations = []
+        
+        # Evaluate each Pillar
+        for pillar in Pillar:
+            pillar_metrics = []
+            
+            for metric_def in self.metrics_registry[pillar]:
+                # Run the check function
+                score, evidence, violations = metric_def["check"](project_manifest)
+                
+                metric = EthicalMetric(
+                    name=metric_def["name"],
+                    pillar=pillar,
+                    score=score,
+                    weight=metric_def["weight"],
+                    evidence=evidence,
+                    violations=violations
+                )
+                
+                pillar_metrics.append(metric)
+                metrics.append(metric)
+                
+                # Check for critical violations
+                if score < self.critical_threshold:
+                    critical_violations.append(
+                        f"{pillar.value} - {metric_def['name']}: {metric_def['description']}"
+                    )
+                elif score < self.violation_threshold:
+                    required_mitigations.append(
+                        f"Improve {metric_def['name']}: {', '.join(violations)}"
+                    )
+            
+            # Calculate weighted pillar score
+            total_weight = sum(m.weight for m in pillar_metrics)
+            weighted_score = sum(m.score * m.weight for m in pillar_metrics)
+            pillar_scores[pillar] = weighted_score / total_weight if total_weight > 0 else 0
+        
+        # Calculate overall score (weighted by pillar importance)
+        pillar_weights = {
+            Pillar.TRUTH: 3.0,   # Highest - absolute requirements
+            Pillar.IMPACT: 2.0,  # High - safety critical
+            Pillar.UTILITY: 1.5  # Important - sustainability
+        }
+        
+        total_weight = sum(pillar_weights.values())
+        overall_score = sum(
+            pillar_scores[p] * pillar_weights[p] for p in Pillar
+        ) / total_weight
+        
+        # Generate attestation hash
+        report_data = {
+            "project_id": project_id,
+            "timestamp": datetime.utcnow().isoformat(),
+            "overall_score": overall_score,
+            "pillar_scores": {p.value: s for p, s in pillar_scores.items()}
+        }
+        attestation_hash = hashlib.sha256(
+            json.dumps(report_data, sort_keys=True).encode()
+        ).hexdigest()
+        
+        return ComplianceReport(
+            project_id=project_id,
+            timestamp=report_data["timestamp"],
+            overall_score=overall_score,
+            pillar_scores=pillar_scores,
+            metrics=metrics,
+            critical_violations=critical_violations,
+            required_mitigations=required_mitigations,
+            attestation_hash=attestation_hash
+        )
+    
+    # Pillar 1: Truth and Integrity Checks
+    
+    def _check_transparency(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Duty of Revelation - transparency requirements"""
+        score = 0.0
+        evidence = []
+        violations = []
+        
+        # Check for documentation
+        if manifest.get("documentation_completeness", 0) > 0.8:
+            score += 0.3
+            evidence.append("Comprehensive documentation provided")
+        else:
+            violations.append("Insufficient documentation")
+        
+        # Check for open source
+        if manifest.get("source_availability") == "open":
+            score += 0.3
+            evidence.append("Source code publicly available")
+        elif manifest.get("source_availability") == "auditable":
+            score += 0.2
+            evidence.append("Source code auditable on request")
+        else:
+            violations.append("Source code not auditable")
+        
+        # Check for algorithmic transparency
+        if manifest.get("algorithm_explainability", 0) > 0.7:
+            score += 0.4
+            evidence.append("Algorithms are explainable")
+        else:
+            violations.append("Opaque algorithmic processes")
+            
+        return min(score, 1.0), evidence, violations
+    
+    def _check_honesty(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Requirement of Honesty - no deceptive practices"""
+        score = 1.0  # Start with assumption of honesty
+        evidence = []
+        violations = []
+        
+        # Check for dark patterns
+        dark_patterns = manifest.get("dark_patterns_scan", [])
+        if dark_patterns:
+            score -= 0.3 * len(dark_patterns)
+            violations.extend([f"Dark pattern detected: {p}" for p in dark_patterns])
+        else:
+            evidence.append("No dark patterns detected")
+        
+        # Check capability claims
+        if manifest.get("capability_claims_verified", False):
+            evidence.append("Capability claims independently verified")
+        else:
+            score -= 0.2
+            violations.append("Unverified capability claims")
+        
+        # Check for misleading UI/UX
+        if manifest.get("ui_honesty_score", 1.0) < 0.8:
+            score -= 0.3
+            violations.append("Potentially misleading interface elements")
+        else:
+            evidence.append("Interface honestly represents functionality")
+            
+        return max(score, 0.0), evidence, violations
+    
+    def _check_harm_intent(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Prohibition of Malice - no intentional harm"""
+        score = 1.0
+        evidence = []
+        violations = []
+        
+        # Check primary purpose
+        harmful_purposes = [
+            "surveillance", "manipulation", "addiction",
+            "disinformation", "harassment", "discrimination"
+        ]
+        
+        primary_purpose = manifest.get("primary_purpose", "").lower()
+        for harm in harmful_purposes:
+            if harm in primary_purpose:
+                score = 0.0  # Automatic failure
+                violations.append(f"Harmful primary purpose: {harm}")
+                return score, evidence, violations
+        
+        evidence.append("No harmful primary purpose detected")
+        
+        # Check for harm mitigation
+        if manifest.get("harm_mitigation_measures", []):
+            evidence.append("Active harm mitigation implemented")
+        else:
+            score -= 0.2
+            violations.append("No harm mitigation measures")
+            
+        return score, evidence, violations
+    
+    # Pillar 2: Sustainable Utility Checks
+    
+    def _check_resource_balance(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Balance of Consumption - resource proportionality"""
+        score = 0.0
+        evidence = []
+        violations = []
+        
+        # Energy efficiency
+        energy_rating = manifest.get("energy_efficiency_rating", "F")
+        efficiency_scores = {"A": 1.0, "B": 0.8, "C": 0.6, "D": 0.4, "E": 0.2, "F": 0.0}
+        score = efficiency_scores.get(energy_rating, 0.0)
+        
+        if score >= 0.6:
+            evidence.append(f"Energy efficiency rating: {energy_rating}")
+        else:
+            violations.append(f"Poor energy efficiency: {energy_rating}")
+            
+        # Resource justification
+        if manifest.get("resource_justification_provided", False):
+            evidence.append("Resource consumption justified by utility")
+        else:
+            score *= 0.7
+            violations.append("Insufficient resource justification")
+            
+        return score, evidence, violations
+    
+    def _check_longevity(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Commitment to Persistence - durability and repairability"""
+        score = 0.0
+        evidence = []
+        violations = []
+        
+        # Planned obsolescence check
+        if manifest.get("planned_obsolescence", False):
+            score = 0.0  # Automatic failure
+            violations.append("Planned obsolescence detected")
+            return score, evidence, violations
+        
+        # Repairability score
+        repairability = manifest.get("repairability_score", 0)
+        score = repairability
+        
+        if repairability >= 0.7:
+            evidence.append(f"High repairability score: {repairability:.2f}")
+        else:
+            violations.append(f"Low repairability: {repairability:.2f}")
+            
+        # Update commitment
+        if manifest.get("longterm_support_commitment", 0) >= 3:
+            score = min(score + 0.3, 1.0)
+            evidence.append("Long-term support committed")
+            
+        return score, evidence, violations
+    
+    def _check_regeneration(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Mandate of Regeneration - positive contribution"""
+        score = 0.5  # Neutral starting point
+        evidence = []
+        violations = []
+        
+        # Environmental impact
+        carbon_offset = manifest.get("carbon_offset_ratio", 0)
+        if carbon_offset > 1.0:
+            score += 0.3
+            evidence.append(f"Carbon positive: {carbon_offset:.2f}x offset")
+        elif carbon_offset > 0:
+            score += 0.1
+            evidence.append(f"Partial carbon offset: {carbon_offset:.2f}x")
+        else:
+            violations.append("No carbon offset mechanism")
+            
+        # Social regeneration
+        if manifest.get("community_contribution", []):
+            score += 0.2
+            evidence.append("Active community contribution")
+            
+        return min(score, 1.0), evidence, violations
+    
+    # Pillar 3: Proportional Impact Checks
+    
+    def _check_risk_mitigation(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Preemptive Mitigation - proactive risk management"""
+        score = 0.0
+        evidence = []
+        violations = []
+        
+        # Stress testing
+        stress_test_coverage = manifest.get("stress_test_coverage", 0)
+        score = stress_test_coverage
+        
+        if stress_test_coverage >= 0.8:
+            evidence.append(f"Comprehensive stress testing: {stress_test_coverage:.1%}")
+        else:
+            violations.append(f"Insufficient stress testing: {stress_test_coverage:.1%}")
+            
+        # Risk assessment document
+        if manifest.get("risk_assessment_complete", False):
+            score = min(score + 0.2, 1.0)
+            evidence.append("Complete risk assessment documented")
+            
+        # Mitigation strategies
+        mitigations = manifest.get("mitigation_strategies", [])
+        if len(mitigations) >= 3:
+            score = min(score + 0.2, 1.0)
+            evidence.append(f"{len(mitigations)} mitigation strategies defined")
+            
+        return score, evidence, violations
+    
+    def _check_scale_responsibility(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Responsibility of Scale - proportional vigilance"""
+        score = 1.0
+        evidence = []
+        violations = []
+        
+        user_scale = manifest.get("projected_user_base", 0)
+        monitoring_level = manifest.get("monitoring_capability", 0)
+        
+        # Required monitoring scales with user base
+        required_monitoring = np.log10(max(user_scale, 1)) / 10
+        
+        if monitoring_level >= required_monitoring:
+            evidence.append("Monitoring scales with user base")
+        else:
+            deficit = required_monitoring - monitoring_level
+            score -= deficit
+            violations.append(f"Monitoring deficit for scale: {deficit:.2f}")
+            
+        # Governance scaling
+        if user_scale > 10000 and not manifest.get("governance_structure"):
+            score -= 0.3
+            violations.append("No governance structure for large-scale deployment")
+        elif manifest.get("governance_structure"):
+            evidence.append("Governance structure defined")
+            
+        return max(score, 0.0), evidence, violations
+    
+    def _check_remediation(self, manifest: Dict) -> Tuple[float, List[str], List[str]]:
+        """Check Mandate of Repair - response readiness"""
+        score = 0.0
+        evidence = []
+        violations = []
+        
+        # Incident response plan
+        if manifest.get("incident_response_plan", False):
+            score += 0.4
+            evidence.append("Incident response plan documented")
+        else:
+            violations.append("No incident response plan")
+            
+        # Rollback capability
+        if manifest.get("rollback_capability", False):
+            score += 0.3
+            evidence.append("Rollback mechanism available")
+        else:
+            violations.append("No rollback capability")
+            
+        # User harm remediation
+        if manifest.get("user_harm_compensation_fund", False):
+            score += 0.3
+            evidence.append("User harm compensation mechanism exists")
+            
+        return score, evidence, violations
+    
+    def generate_attestation(self, report: ComplianceReport) -> Dict:
+        """
+        Generate cryptographic attestation for compliance report
+        This will integrate with ZK circuits in production
+        """
+        attestation = {
+            "project_id": report.project_id,
+            "timestamp": report.timestamp,
+            "overall_compliance": report.overall_score >= self.violation_threshold,
+            "critical_violations": len(report.critical_violations) == 0,
+            "attestation_hash": report.attestation_hash,
+            "signature": hashlib.sha256(
+                f"{report.attestation_hash}{datetime.utcnow().isoformat()}".encode()
+            ).hexdigest(),
+            "metadata": {
+                "assessor_version": "1.0.0",
+                "charter_version": "SEC-v1",
+                "pillar_scores": {p.value: s for p, s in report.pillar_scores.items()}
+            }
+        }
+        
+        return attestation
+    
+    def export_for_dao_vote(self, report: ComplianceReport) -> Dict:
+        """
+        Export assessment for DAO governance voting
+        """
+        return {
+            "proposal_id": f"ETHICS-{report.project_id}",
+            "proposal_type": "PROJECT_COMPLIANCE_REVIEW",
+            "compliance_score": report.overall_score,
+            "recommendation": self._get_recommendation(report),
+            "voting_weight_modifier": report.overall_score,  # Higher compliance = more voting weight
+            "data_hash": report.attestation_hash,
+            "voting_deadline": (datetime.utcnow().timestamp() + 7 * 24 * 3600),  # 7 days
+            "quorum_requirement": 0.3 if report.overall_score > 0.8 else 0.5  # Higher quorum for risky projects
+        }
+    
+    def _get_recommendation(self, report: ComplianceReport) -> str:
+        """Generate recommendation based on compliance score"""
+        if report.critical_violations:
+            return "REJECT - Critical violations of Sacred Ethics Charter"
+        elif report.overall_score >= 0.9:
+            return "APPROVE - Exemplary compliance"
+        elif report.overall_score >= self.violation_threshold:
+            return "CONDITIONAL_APPROVE - Requires specified mitigations"
+        else:
+            return "REVISE - Significant improvements required"
+
+
+# CLI Interface for testing
+if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Sacred Ethics Charter Compliance Assessment")
+    parser.add_argument("--manifest", type=str, help="Path to project manifest JSON")
+    parser.add_argument("--example", action="store_true", help="Run example assessment")
+    
+    args = parser.parse_args()
+    
+    assessor = EthicalImpactAssessor()
+    
+    if args.example:
+        # Example manifest for testing
+        example_manifest = {
+            "project_id": "helix-test-001",
+            "project_name": "Distributed Wisdom Oracle",
+            "primary_purpose": "Collective intelligence augmentation",
+            "documentation_completeness": 0.9,
+            "source_availability": "open",
+            "algorithm_explainability": 0.85,
+            "capability_claims_verified": True,
+            "ui_honesty_score": 0.95,
+            "harm_mitigation_measures": ["rate limiting", "content filtering", "user consent"],
+            "energy_efficiency_rating": "B",
+            "resource_justification_provided": True,
+            "planned_obsolescence": False,
+            "repairability_score": 0.8,
+            "longterm_support_commitment": 5,
+            "carbon_offset_ratio": 1.2,
+            "community_contribution": ["open source", "educational resources"],
+            "stress_test_coverage": 0.85,
+            "risk_assessment_complete": True,
+            "mitigation_strategies": ["gradual rollout", "monitoring", "quick shutdown"],
+            "projected_user_base": 50000,
+            "monitoring_capability": 0.7,
+            "governance_structure": "DAO",
+            "incident_response_plan": True,
+            "rollback_capability": True,
+            "user_harm_compensation_fund": False
+        }
+        
+        print("\n" + "="*60)
+        print("SACRED ETHICS CHARTER - COMPLIANCE ASSESSMENT")
+        print("="*60)
+        
+        report = assessor.assess_project(example_manifest)
+        
+        print(f"\nProject ID: {report.project_id}")
+        print(f"Assessment Time: {report.timestamp}")
+        print(f"\n{'='*20} COMPLIANCE SCORES {'='*20}")
+        print(f"Overall Score: {report.overall_score:.2%}")
+        
+        print("\nPillar Scores:")
+        for pillar, score in report.pillar_scores.items():
+            status = "✓" if score >= assessor.violation_threshold else "✗"
+            print(f"  {status} {pillar.value}: {score:.2%}")
+        
+        if report.critical_violations:
+            print(f"\n{'='*20} CRITICAL VIOLATIONS {'='*20}")
+            for violation in report.critical_violations:
+                print(f"  ✗ {violation}")
+        
+        if report.required_mitigations:
+            print(f"\n{'='*20} REQUIRED MITIGATIONS {'='*20}")
+            for mitigation in report.required_mitigations:
+                print(f"  ⚠ {mitigation}")
+        
+        print(f"\n{'='*20} ATTESTATION {'='*20}")
+        attestation = assessor.generate_attestation(report)
+        print(f"Attestation Hash: {attestation['attestation_hash']}")
+        print(f"Signature: {attestation['signature']}")
+        print(f"Compliance Status: {'PASSED' if attestation['overall_compliance'] else 'FAILED'}")
+        
+        print(f"\n{'='*20} DAO GOVERNANCE EXPORT {'='*20}")
+        dao_export = assessor.export_for_dao_vote(report)
+        print(f"Proposal ID: {dao_export['proposal_id']}")
+        print(f"Recommendation: {dao_export['recommendation']}")
+        print(f"Voting Weight Modifier: {dao_export['voting_weight_modifier']:.2f}x")
+        
+    elif args.manifest:
+        with open(args.manifest, 'r') as f:
+            manifest = json.load(f)
+        report = assessor.assess_project(manifest)
+        print(json.dumps(assessor.generate_attestation(report), indent=2))
+    else:
+        parser.print_help()
