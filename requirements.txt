@@ -1,5 +1,26 @@
-pyyaml
-cirq  # For real ZK-SNARKs
-flwr  # Federated learning
-web3  # DAO integration
-sqlite3  # Built-in
+# --- Core AI & Federated Learning (The Brain) ---
+# Flower: The framework for running federated learning
+flwr[simulation]>=1.5.0
+# PyTorch: The engine for your Neural Networks
+torch>=2.0.0
+torchvision>=0.15.0
+# NumPy: Required for matrix operations in FL
+numpy>=1.24.0
+
+# --- Zero-Knowledge Proofs (The Shield) ---
+# EZKL: Converts PyTorch models into ZK-SNARK circuits
+ezkl>=0.1.0
+# ONNX: Standard format for exporting models to EZKL
+onnx>=1.14.0
+
+# --- DAO & Blockchain Interaction (The Gavel) ---
+# Web3.py: For talking to your Solidity smart contract
+web3>=6.0.0
+# Python-Dotenv: To securely load your private keys/API keys
+python-dotenv>=1.0.0
+
+# --- System Utilities ---
+# Pandas: For handling local data logs
+pandas>=2.0.0
+# Click: For creating that command-line interface (CLI) you had
+click>=8.1.0
